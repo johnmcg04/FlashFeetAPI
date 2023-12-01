@@ -5,10 +5,10 @@ CREATE TABLE JobRoles
 jobId 				int 			NOT NULL	AUTO_INCREMENT,
 title				varchar(70)		NOT NULL,
 capability			varchar(30)		NOT NULL,
-capabilityGroup		varchar(30)		NOT NULL,
+capabilityGroup			varchar(30)		NOT NULL,
 bandLevel			varchar(70)		NOT NULL,
-jobSpecification	varchar(70) 	NOT NULL,
-salary				decimal(8,2)	NOT NULL,
+jobSpecification		varchar(70) 		NOT NULL,
+salary				decimal(8,2)		NOT NULL,
 location 			varchar(30),		
 CONSTRAINT pk_jobroles_jid PRIMARY KEY (jobId),
 CONSTRAINT fk_jobroles_blevel FOREIGN KEY (bandLevel) REFERENCES BandComp(bandLevel),
@@ -24,7 +24,7 @@ CONSTRAINT pk_bandcomp_blevel PRIMARY KEY (bandLevel)
 
 CREATE TABLE TrainingLevel
 (
-trainingLevel		varchar(70)		NOT NULL,
+trainingLevel			varchar(70)		NOT NULL,
 competency			varchar(70)		NOT NULL,
 CONSTRAINT pk_traininglevel_tlevel	PRIMARY KEY (trainingLevel)
 );
@@ -34,16 +34,16 @@ CONSTRAINT pk_traininglevel_tlevel	PRIMARY KEY (trainingLevel)
 
 CREATE TABLE `Role`
 (
-  roleId 			int 			NOT NULL	AUTO_INCREMENT,
+  roleId 			int 		NOT NULL	AUTO_INCREMENT,
   `name` 			varchar(70) 	NOT NULL,
   CONSTRAINT pk_role_rid PRIMARY KEY (roleId)
 );
 
 CREATE TABLE `User`
  (
-  username			varchar(70)		NOT NULL,
-  `password`		varchar(70) 	NOT NULL,
-  roleId			int	 			NOT NULL,
+  username			varchar(70)	NOT NULL,
+  `password`			varchar(70) 	NOT NULL,
+  roleId			int	 	NOT NULL,
   CONSTRAINT pk_user_uname PRIMARY KEY (Username),
   KEY RoleID (RoleID),
   CONSTRAINT fk_User_roleId FOREIGN KEY (RoleID) REFERENCES `Role`(RoleID),
@@ -59,7 +59,7 @@ CREATE TABLE Token
 (
   username			varchar(70) 	NOT NULL,
   token				varchar(70) 	NOT NULL,
-  expiry			datetime 		NOT NULL,
+  expiry			datetime 	NOT NULL,
   KEY Username (username),
   CONSTRAINT fk_token_uname FOREIGN KEY (username) REFERENCES `User`(username)
 );

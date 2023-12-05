@@ -1,0 +1,3 @@
+ALTER TABLE JobRole
+ADD COLUMN bandLevel	varchar(70)		NOT NULL
+AFTER capability;

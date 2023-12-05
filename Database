@@ -1,0 +1,3 @@
+ALTER TABLE JobRole
+ADD COLUMN responsibilities	varchar(70)		 
+AFTER bandlevel;

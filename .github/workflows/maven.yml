@@ -12,7 +12,7 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "US000-API-Repo-Setup" ]
 
 jobs:
   build:

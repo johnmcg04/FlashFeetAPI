@@ -2,6 +2,10 @@ package org.example.cli;
 
 public class JobRole {
 
+    public JobRole(){
+
+    }
+
     private String jobRole;
 
     public String getJobRole() {

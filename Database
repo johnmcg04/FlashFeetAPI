@@ -1,0 +1,3 @@
+ALTER TABLE JobRole
+ADD COLUMN jobSpecification		varchar(70) 		NOT NULL
+AFTER jobRole;

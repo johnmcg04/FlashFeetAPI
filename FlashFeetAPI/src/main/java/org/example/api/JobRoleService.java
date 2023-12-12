@@ -21,6 +21,7 @@ public class JobRoleService {
 
     public List<JobRole> getAllJobRoles() throws FailedToGetJobsException {
         try {
+
             List<JobRole> jobRoleList = jobRoleDao.getAllJobRoles();
 
             return jobRoleList;

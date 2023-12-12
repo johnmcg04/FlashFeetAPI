@@ -20,7 +20,6 @@ public class trueApplication extends Application<trueConfiguration> {
 
     @Override
     public void initialize(final Bootstrap<trueConfiguration> bootstrap) {
-        // TODO: application initialization
         bootstrap.addBundle(new SwaggerBundle<trueConfiguration>(){
             @Override
             protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(trueConfiguration configuration) {

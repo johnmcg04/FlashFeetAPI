@@ -2,10 +2,7 @@ package org.example.db;
 
 import org.example.cli.JobRole;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +27,37 @@ public class JobRoleDao {
         }
 
         return jobRoleList;
+    }
+
+    public JobRole getJobRole(String jobRole) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+
+        String selectStatement = "SELECT jobRole FROM JobRole where jobRole= ?" ;
+
+        PreparedStatement st = c.prepareStatement(selectStatement);
+
+        st.setString(1, jobRole);
+
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            return new JobRole(
+                    rs.getString("jobRole")
+            );
+        }
+        return null;
+    }
+
+    public void deleteJobRole(String jobRole) throws SQLException{
+        Connection c = databaseConnector.getConnection();
+
+        String deleteStatement = "DELETE FROM JobRole WHERE jobRole = ?";
+
+        PreparedStatement st = c.prepareStatement(deleteStatement);
+
+        st.setString(1, jobRole);
+
+        st.executeUpdate();
     }
 
 }

@@ -33,7 +33,7 @@ public class trueApplication extends Application<trueConfiguration> {
     @Override
     public void run(final trueConfiguration configuration,
                     final Environment environment) {
-        environment.jersey().register(new JobRoleController());
+        //environment.jersey().register(new JobRoleController());
         environment.jersey().register(new CapabilityController());
     }
 

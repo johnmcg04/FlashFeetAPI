@@ -7,7 +7,7 @@ public class JobRoleValidator {
 
 
     public boolean isValidJobRole(JobRole jRole){
-        if(jRole.getJobRole().length() > 50){
+        if(jRole.getJobRole().length() > 70){
             return false;
         }
         // more validation needed as fields are added further down the tickets

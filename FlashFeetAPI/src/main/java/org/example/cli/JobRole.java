@@ -7,7 +7,6 @@ public class JobRole {
     }
 
     private String jobRole;
-    private String
 
     public String getJobRole() {
         return jobRole;

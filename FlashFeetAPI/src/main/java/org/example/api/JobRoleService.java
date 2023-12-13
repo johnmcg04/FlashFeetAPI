@@ -28,4 +28,15 @@ public class JobRoleService {
             throw new FailedToGetJobsException();
         }
     }
+
+    public String getCapabilityByJobRole(String jRole) throws FailedToGetJobsException {
+        try {
+            String capability = jobRoleDao.getCapabilityByJobRole(jRole);
+
+            return capability;
+        } catch (SQLException e) {
+            throw new FailedToGetJobsException();
+        }
+    }
+
 }

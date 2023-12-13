@@ -29,16 +29,4 @@ public class JobRoleController {
         }
     }
 
-    @GET
-    @Path("/capability-by-job-role/{job_role}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getCapabilityByJobRole(@PathParam("job_role") String jobRole){
-        try {
-            return Response.ok(jobRoleService.getCapabilityByJobRole(jobRole)).build();
-        } catch (FailedToGetJobsException e){
-            System.err.println(e.getMessage());
-
-            return Response.serverError().build();
-        }
-    }
 }

@@ -14,13 +14,15 @@ public class JobRoleDao {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT jobRole FROM JobRole;");
+        ResultSet rs = st.executeQuery("SELECT jobRole, jobSpecification, capability FROM JobRole");
 
         List<JobRole> jobRoleList= new ArrayList<>();
 
         while (rs.next()){
             JobRole jobRole = new JobRole(
-                    rs.getString("jobRole")
+                    rs.getString("jobRole"),
+                    rs.getString("jobSpecification"),
+                    rs.getString("capability")
             );
 
             jobRoleList.add(jobRole);
@@ -29,23 +31,8 @@ public class JobRoleDao {
         return jobRoleList;
     }
 
-    public String getCapabilityByJobRole(String jRole) throws SQLException {
-        String capability = "";
-        Connection conn = databaseConnector.getConnection();
-        Statement st = conn.createStatement();
-
-        String sql = "SELECT capability FROM JobRole WHERE jobRole = ?";
-        PreparedStatement prepState = conn.prepareStatement(sql);
-        prepState.setString(1, jRole);
-
-        ResultSet rs = prepState.executeQuery();
-
-            if (rs.next()) {
-                capability = rs.getString("capability");
-            }
 
 
-        return capability;
-    }
+
 
 }

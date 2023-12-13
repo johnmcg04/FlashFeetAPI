@@ -8,6 +8,14 @@ public class JobRole {
 
     private String jobRole;
 
+    private String jobSpecification;
+
+    public JobRole(String jobRole, String jobSpecification, String capability) {
+        this.jobRole = jobRole;
+        this.jobSpecification = jobSpecification;
+        this.capability = capability;
+    }
+
     private String capability;
 
     public JobRole(String jobRole, String capability) {

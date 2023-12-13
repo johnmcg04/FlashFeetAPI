@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS FlashFeet_BreannaL;
-USE FlashFeet_BreannaL;
+CREATE DATABASE IF NOT EXISTS FlashFeet_JohnMc;
+USE FlashFeet_JohnMc;
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS CreateDatabase $$

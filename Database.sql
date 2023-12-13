@@ -1,0 +1,15 @@
+CREATE DATABASE IF NOT EXISTS FlashFeet_JohnMc;
+USE FlashFeet_JohnMc;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS CreateDatabase $$
+CREATE PROCEDURE CreateDatabase()
+BEGIN
+  
+CREATE TABLE IF NOT EXISTS JobRole(
+	jobRole VARCHAR(70) PRIMARY KEY
+);
+
+END $$
+DELIMITER ;
+CALL CreateDatabase();

@@ -29,7 +29,7 @@ public class JobRoleController {
         }
     }
     @DELETE
-    @Path("/job-role/{jobRole}")
+    @Path("/delete-job-role/{jobRole}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteJobRole(@PathParam("jobRole") String jobRole) {
         try {

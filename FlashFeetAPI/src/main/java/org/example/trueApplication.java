@@ -31,12 +31,7 @@ public class trueApplication extends Application<trueConfiguration> {
     @Override
     public void run(final trueConfiguration configuration,
                     final Environment environment) {
-<<<<<<< HEAD
-        //environment.jersey().register(new JobRoleController());
-        environment.jersey().register(new CapabilityController());
-=======
             environment.jersey().register(new JobEntryController());
->>>>>>> US002-view-job-spec
     }
 
 }

@@ -13,7 +13,7 @@ public class JobRoleService {
 
     private JobRoleDao jobRoleDao = new JobRoleDao();
 
-    public DatabaseConnector databaseConnector;
+    public DatabaseConnector databaseConnector = new DatabaseConnector();
 
     public JobRoleService(){
 
@@ -24,15 +24,7 @@ public class JobRoleService {
         this.databaseConnector = databaseConnector;
     }
 
-    public List<JobRole> getAllJobRoles() throws FailedToGetJobsException {
-        List<JobRole> jobRoleList;
-        try {
-            jobRoleList = jobRoleDao.getAllJobRoles(databaseConnector.getConnection());
-
-        } catch (SQLException e) {
-            throw new FailedToGetJobsException();
-        }
-
-        return jobRoleList;
+    public List<JobRole> getAllJobRoles() throws FailedToGetJobsException, SQLException {
+        return jobRoleDao.getAllJobRoles(databaseConnector.getConnection());
     }
 }

@@ -32,9 +32,8 @@ public class JobRoleService {
 
     public List<String> getAllCapabilities() throws FailedToGetCapability {
         try {
-            List<String> capabilitiesList = jobRoleDao.getAllCapabilities();
 
-            return capabilitiesList;
+            return jobRoleDao.getAllCapabilities();
         } catch (SQLException e) {
             throw new FailedToGetCapability();
         }

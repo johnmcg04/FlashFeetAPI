@@ -8,6 +8,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.example.api.JobRoleService;
 import org.example.client.FailedToGetJobsException;
+import org.example.db.DatabaseConnector;
 
 @Api("FlashFeet Kainos Job Data API")
 @Path("/api")
@@ -20,7 +21,8 @@ public class JobRoleController {
     public Response getAllJobRoles(){
         System.out.println("Test");
         try {
-            return Response.ok(jobRoleService.getAllJobRoles()).build();
+            DatabaseConnector databaseConnector = null;
+            return Response.ok(jobRoleService.getAllJobRoles(databaseConnector)).build();
         } catch (FailedToGetJobsException e){
             System.err.println(e.getMessage());
 

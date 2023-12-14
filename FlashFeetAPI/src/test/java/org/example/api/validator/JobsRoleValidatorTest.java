@@ -12,7 +12,8 @@ class JobsRoleValidatorTest {
     void isValidJobRole_shouldReturnTrue_whenValidJobRole() {
         JobEntry jRole = new JobEntry(
                 "Business Development Manager",
-                "Business Development"
+                "Business Development",
+                "Business Development and Market"
         );
 
 

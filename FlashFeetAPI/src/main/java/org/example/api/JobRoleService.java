@@ -24,7 +24,7 @@ public class JobRoleService {
         this.databaseConnector = databaseConnector;
     }
 
-    public List<JobRole> getAllJobRoles(DatabaseConnector databaseConnector) throws FailedToGetJobsException {
+    public List<JobRole> getAllJobRoles() throws FailedToGetJobsException {
         List<JobRole> jobRoleList;
         try {
             jobRoleList = jobRoleDao.getAllJobRoles(databaseConnector.getConnection());

@@ -22,7 +22,7 @@ public class JobRoleController {
         System.out.println("Test");
         try {
             DatabaseConnector databaseConnector = null;
-            return Response.ok(jobRoleService.getAllJobRoles(databaseConnector)).build();
+            return Response.ok(jobRoleService.getAllJobRoles()).build();
         } catch (FailedToGetJobsException e){
             System.err.println(e.getMessage());
 

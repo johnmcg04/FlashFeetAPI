@@ -1,6 +1,7 @@
 package org.example.db;
 
 import java.io.FileInputStream;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -29,6 +30,7 @@ public class DatabaseConnector {
                         "and must contain user, password, name and host properties.");
 
             conn = DriverManager.getConnection("jdbc:mysql://" + host + "/" + name + "?useSSL=false", user, password);
+            //conn = DriverManager.getConnection("jdbc:mysql://100.127.29.164/FlashFeet_JohnMc useSSL=false, John_Mc, John123");
             return conn;
 
         }catch(Exception e){

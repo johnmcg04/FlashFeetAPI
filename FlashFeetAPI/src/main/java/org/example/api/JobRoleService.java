@@ -1,6 +1,7 @@
 package org.example.api;
 
 import org.example.cli.JobRole;
+import org.example.client.FailedToGetCapability;
 import org.example.client.FailedToGetJobsException;
 import org.example.db.DatabaseConnector;
 import org.example.db.JobRoleDao;
@@ -29,13 +30,13 @@ public class JobRoleService {
         }
     }
 
-    public String getCapabilityByJobRole(String jRole) throws FailedToGetJobsException {
+    public List<String> getAllCapabilities() throws FailedToGetCapability {
         try {
-            String capability = jobRoleDao.getCapabilityByJobRole(jRole);
+            List<String> capabilitiesList = jobRoleDao.getAllCapabilities();
 
-            return capability;
+            return capabilitiesList;
         } catch (SQLException e) {
-            throw new FailedToGetJobsException();
+            throw new FailedToGetCapability();
         }
     }
 

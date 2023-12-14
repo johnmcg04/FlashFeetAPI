@@ -32,6 +32,25 @@ public class JobRoleDao {
     }
 
 
+    public List<String> getAllCapabilities() throws SQLException {
+        Connection c = DatabaseConnector.getConnection();
+        assert c != null;
+        Statement st = c.createStatement();
+
+        ResultSet rs = st.executeQuery("SELECT capability FROM JobRole");
+
+        List<String> capabilitiesList = new ArrayList<>();
+
+        while (rs.next()){
+            String cap = new String(
+                    rs.getString("capability")
+            );
+            capabilitiesList.add(cap);
+        }
+
+        return capabilitiesList;
+    }
+
 
 
 

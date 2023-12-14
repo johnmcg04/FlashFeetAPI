@@ -5,6 +5,8 @@ import io.swagger.annotations.Api;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
+
 import org.example.api.JobRoleService;
 import org.example.client.FailedToDeleteJobRoleException;
 import org.example.client.FailedToGetJobsException;
@@ -32,6 +34,7 @@ public class JobRoleController {
     @Path("/delete-job-role/{jobRole}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteJobRole(@PathParam("jobRole") String jobRole) {
+        System.out.println(jobRole);
         try {
             jobRoleService.deleteJobRole(jobRole);
 

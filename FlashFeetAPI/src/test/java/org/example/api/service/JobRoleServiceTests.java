@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,55 +24,55 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(MockitoExtension.class)
-public class JobRoleServiceTests {
-
-        JobRoleDao jobRoleDao = mock(JobRoleDao.class);
-        DatabaseConnector databaseConnector = mock(DatabaseConnector.class);
-
-        JobRoleService jobRoleService = new JobRoleService(jobRoleDao, databaseConnector);
-
-        @Test
-        void getAllJobRoles_shouldReturnAllJobRoles_whenDaoReturnsAllJobRoles() throws SQLException, DatabaseConnectionException, JobRoleDoesNotExistException, FailedToGetJobsException {
-
-                Connection c = mock(Connection.class); // Mock the Connection object inside the test method
-
-                List<JobRole> listOfJobRoles = Arrays.asList(
-                        Mockito.mock(JobRole.class)
-                );
-
-                Mockito.when(databaseConnector.getConnection()).thenReturn(c);
-                Mockito.when(jobRoleDao.getAllJobRoles(c)).thenReturn(new ArrayList<>(listOfJobRoles)); // Create a new list from the original list
-                assertEquals(listOfJobRoles, jobRoleService.getAllJobRoles());
-        }
-}
-
-
-
-
 //@ExtendWith(MockitoExtension.class)
 //public class JobRoleServiceTests {
 //
 //        JobRoleDao jobRoleDao = mock(JobRoleDao.class);
 //        DatabaseConnector databaseConnector = mock(DatabaseConnector.class);
 //
-//        JobRoleService jobRoleService = new JobRoleService( jobRoleDao, databaseConnector);
-//
-//        Connection c;
+//        JobRoleService jobRoleService = new JobRoleService(jobRoleDao, databaseConnector);
 //
 //        @Test
 //        void getAllJobRoles_shouldReturnAllJobRoles_whenDaoReturnsAllJobRoles() throws SQLException, DatabaseConnectionException, JobRoleDoesNotExistException, FailedToGetJobsException {
 //
+//                Connection c = mock(Connection.class); // Mock the Connection object inside the test method
+//
 //                List<JobRole> listOfJobRoles = Arrays.asList(
 //                        Mockito.mock(JobRole.class)
-//                        );
-//
+//                );
 //
 //                Mockito.when(databaseConnector.getConnection()).thenReturn(c);
-//                Mockito.when(jobRoleDao.getAllJobRoles(c)).thenReturn(listOfJobRoles);
+//                Mockito.when(jobRoleDao.getAllJobRoles(c)).thenReturn(new ArrayList<>(listOfJobRoles)); // Create a new list from the original list
 //                assertEquals(listOfJobRoles, jobRoleService.getAllJobRoles());
 //        }
 //}
+
+
+
+
+@ExtendWith(MockitoExtension.class)
+public class JobRoleServiceTests {
+
+        JobRoleDao jobRoleDao = mock(JobRoleDao.class);
+        DatabaseConnector databaseConnector = mock(DatabaseConnector.class);
+
+        JobRoleService jobRoleService = new JobRoleService( jobRoleDao, databaseConnector);
+
+        Connection c;
+
+        @Test
+        void getAllJobRoles_shouldReturnAllJobRoles_whenDaoReturnsAllJobRoles() throws SQLException, DatabaseConnectionException, JobRoleDoesNotExistException, FailedToGetJobsException {
+
+                List<JobRole> listOfJobRoles = Collections.singletonList(
+                        mock(JobRole.class)
+                );
+
+
+                Mockito.when(databaseConnector.getConnection()).thenReturn(c);
+                Mockito.when(jobRoleDao.getAllJobRoles(c)).thenReturn(listOfJobRoles);
+                assertEquals(listOfJobRoles, jobRoleService.getAllJobRoles());
+        }
+}
 
 
 

@@ -13,7 +13,8 @@ class JobsRoleValidatorTest {
         JobEntry jRole = new JobEntry(
                 "Business Development Manager",
                 "Business Development",
-                "Business Development and Market"
+                "Business Development and Market",
+                "Manager"
         );
 
 

@@ -10,6 +10,7 @@ public class JobEntry {
     public String getJobRole() {
         return jobRole;
     }
+    private String bandLevel;
 
     public void setJobRole(String jobRole) {
         this.jobRole = jobRole;
@@ -31,14 +32,26 @@ public class JobEntry {
         this.capability = capability;
     }
 
-    public JobEntry(String jobRole, String jobSpecification, String capability ) {
+    public String getBandLevel() {
+        return bandLevel;
+    }
+
+    public void setBandLevel(String bandLevel) {
+        this.bandLevel = bandLevel;
+    }
+
+    public JobEntry(String jobRole, String jobSpecification, String capability, String bandLevel ) {
         this.jobRole = jobRole;
         this.jobSpecification = jobSpecification;
         this.capability = capability;
+        this.bandLevel = bandLevel;
     }
 
     @Override
     public String toString() {
-        return "Job Role: " + this.jobRole + ", Job Specification: " + this.jobSpecification + ", Capability: " + this.capability;
+        return "Job Role: " + this.jobRole +
+                ", Job Specification: " + this.jobSpecification +
+                ", Capability: " + this.capability +
+                ", Band Level: " + this.bandLevel;
     }
 }

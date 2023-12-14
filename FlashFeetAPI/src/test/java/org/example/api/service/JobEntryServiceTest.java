@@ -21,7 +21,8 @@ public class JobEntryServiceTest {
         JobEntry jRole = new JobEntry(
                 "Test engineer",
                 "Test Specification",
-                "Test capability"
+                "Test capability",
+                "Test bandLevel"
         );
 
 }

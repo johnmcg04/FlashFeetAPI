@@ -1,6 +1,6 @@
 package org.example.api.validator;
 
-import org.example.cli.JobRole;
+import org.example.cli.JobEntry;
 import org.example.validator.JobRoleValidator;
 import org.junit.jupiter.api.Test;
 
@@ -10,9 +10,9 @@ class JobsRoleValidatorTest {
     JobRoleValidator jobRoleValidator = new JobRoleValidator();
     @Test
     void isValidJobRole_shouldReturnTrue_whenValidJobRole() {
-        JobRole jRole = new JobRole(
-                "software engineer"
-
+        JobEntry jRole = new JobEntry(
+                "Business Development Manager",
+                "Business Development"
         );
 
 

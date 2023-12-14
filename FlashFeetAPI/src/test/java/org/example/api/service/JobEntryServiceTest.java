@@ -22,7 +22,8 @@ public class JobEntryServiceTest {
                 "Test engineer",
                 "Test Specification",
                 "Test capability",
-                "Test bandLevel"
+                "Test bandLevel",
+                "Test responsibility"
         );
 
 }

@@ -1,7 +1,0 @@
-CREATE TABLE JobRole(
-
-	jobRole VARCHAR(70),
-
-    CONSTRAINT pk_jobrole PRIMARY KEY (jobRole)
-
-);

@@ -1,9 +1,9 @@
 package org.example.api.service;
 
-import org.example.api.JobRoleService;
-import org.example.cli.JobRole;
+import org.example.api.JobEntryService;
+import org.example.cli.JobEntry;
 import org.example.db.DatabaseConnector;
-import org.example.db.JobRoleDao;
+import org.example.db.JobEntryDao;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -11,15 +11,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 @ExtendWith(MockitoExtension.class)
-public class JobRoleServiceTest {
+public class JobEntryServiceTest {
 
-        JobRoleDao jobRoleDao = mock(JobRoleDao.class);
+        JobEntryDao jobEntryDao = mock(JobEntryDao.class);
         DatabaseConnector databaseConnector = mock(DatabaseConnector.class);
 
-        JobRoleService jobRoleService = new JobRoleService(jobRoleDao, databaseConnector);
+        JobEntryService jobEntryService = new JobEntryService(jobEntryDao, databaseConnector);
 
-        JobRole jRole = new JobRole(
-                "Test engineer"
+        JobEntry jRole = new JobEntry(
+                "Test engineer",
+                "Test Specification"
         );
 
 }

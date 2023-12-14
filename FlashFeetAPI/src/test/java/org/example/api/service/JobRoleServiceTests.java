@@ -31,10 +31,10 @@ public class JobRoleServiceTests {
 
         JobRoleService jobRoleService = new JobRoleService(jobRoleDao, databaseConnector);
 
-        Connection c = mock(Connection.class); // Initialize the Connection object
-
         @Test
         void getAllJobRoles_shouldReturnAllJobRoles_whenDaoReturnsAllJobRoles() throws SQLException, DatabaseConnectionException, JobRoleDoesNotExistException, FailedToGetJobsException {
+
+                Connection c = mock(Connection.class); // Mock the Connection object inside the test method
 
                 List<JobRole> listOfJobRoles = Arrays.asList(
                         Mockito.mock(JobRole.class)
@@ -45,6 +45,7 @@ public class JobRoleServiceTests {
                 assertEquals(listOfJobRoles, jobRoleService.getAllJobRoles());
         }
 }
+
 
 
 

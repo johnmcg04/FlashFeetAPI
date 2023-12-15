@@ -14,13 +14,6 @@ public class JobRoleService {
 
     private JobRoleDao jobRoleDao = new JobRoleDao();
 
-    public JobRoleService(){
-
-    }
-
-    public JobRoleService(JobRoleDao jobRoleDao, DatabaseConnector databaseConnector) {
-    }
-
     public List<JobRole> getAllJobRoles() throws FailedToGetJobsException {
         try {
             List<JobRole> jobRoleList = jobRoleDao.getAllJobRoles();

@@ -23,6 +23,9 @@ ALTER TABLE JobRole
 ADD COLUMN jobFamily	varchar(70)		NOT NULL
 AFTER bandLevel;
 
+ALTER TABLE JobRole
+ADD COLUMN jobSpecSummary varchar(70) NOT NULL;
+
 END $$
 DELIMITER ;
 CALL CreateCapabilityBandLevel();

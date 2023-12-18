@@ -12,6 +12,11 @@ import org.example.client.FailedToDeleteJobRoleException;
 import org.example.client.FailedToGetJobsException;
 import org.example.client.JobRoleDoesNotExistException;
 
+import org.example.db.DatabaseConnector;
+
+import java.sql.SQLException;
+
+
 @Api("FlashFeet Kainos Job Data API")
 @Path("/api")
 public class JobRoleController {
@@ -23,11 +28,14 @@ public class JobRoleController {
     public Response getAllJobRoles(){
         System.out.println("Test");
         try {
+            DatabaseConnector databaseConnector = new DatabaseConnector();
             return Response.ok(jobRoleService.getAllJobRoles()).build();
         } catch (FailedToGetJobsException e){
             System.err.println(e.getMessage());
 
             return Response.serverError().build();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
     @DELETE

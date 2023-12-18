@@ -22,13 +22,14 @@ import java.sql.SQLException;
 public class JobRoleController {
     private JobRoleService jobRoleService = new JobRoleService();
 
+    DatabaseConnector databaseConnector = new DatabaseConnector();
+
     @GET
     @Path("/job-role-list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllJobRoles(){
         System.out.println("Test");
         try {
-            DatabaseConnector databaseConnector = new DatabaseConnector();
             return Response.ok(jobRoleService.getAllJobRoles()).build();
         } catch (FailedToGetJobsException e){
             System.err.println(e.getMessage());
@@ -44,7 +45,7 @@ public class JobRoleController {
     public Response deleteJobRole(@PathParam("jobRole") String jobRole) {
         System.out.println(jobRole);
         try {
-            jobRoleService.deleteJobRole(jobRole);
+            jobRoleService.deleteJobRole(jobRole, databaseConnector);
 
             return Response.ok().build();
         } catch (JobRoleDoesNotExistException e) {

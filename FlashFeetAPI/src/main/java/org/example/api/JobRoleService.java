@@ -30,18 +30,16 @@ public class JobRoleService {
         return jobRoleDao.getAllJobRoles(databaseConnector.getConnection());
     }
 
-    public void deleteJobRole(String jobRole) throws JobRoleDoesNotExistException, FailedToDeleteJobRoleException {
+    public int deleteJobRole(String jobRole, DatabaseConnector databaseConnector) throws JobRoleDoesNotExistException, FailedToDeleteJobRoleException {
         try {
             JobRole deleteJobRole = jobRoleDao.getJobRole(jobRole);
-            if (deleteJobRole == null) {
-                throw new JobRoleDoesNotExistException();
-            }
 
             jobRoleDao.deleteJobRole(jobRole);
+            return 1;
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+            return -1;
 
-            throw new FailedToDeleteJobRoleException();
         }
     }
 }

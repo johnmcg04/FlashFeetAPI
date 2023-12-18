@@ -48,16 +48,25 @@ public class JobRoleDao {
         return null;
     }
 
-    public void deleteJobRole(String jobRole) throws SQLException{
-        Connection c = databaseConnector.getConnection();
+    public int deleteJobRole(String jobRole) throws SQLException{
+        try{
+            Connection c = databaseConnector.getConnection();
 
-        String deleteStatement = "DELETE FROM JobRole WHERE jobRole = ?";
+            String deleteStatement = "DELETE FROM JobRole WHERE jobRole = ?";
 
-        PreparedStatement st = c.prepareStatement(deleteStatement);
+            PreparedStatement st = c.prepareStatement(deleteStatement);
 
-        st.setString(1, jobRole);
+            st.setString(1, jobRole);
 
-        st.executeUpdate();
+            st.executeUpdate();
+            return 1;
+        }
+
+
+        catch(SQLException ex){
+            System.out.println(ex.getMessage());
+            return -1;
+        }
     }
 
 }

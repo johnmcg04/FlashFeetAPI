@@ -11,7 +11,7 @@ public class JobEntry {
         return jobRole;
     }
     private String bandLevel;
-
+    private String jobFamily;
 
     private String responsibilities;
 
@@ -42,8 +42,11 @@ public class JobEntry {
     public void setBandLevel(String bandLevel) {
         this.bandLevel = bandLevel;
     }
+    public String getJobFamily() { return jobFamily; }
 
-
+    public void setJobFamily(String jobFamily) {
+        this.jobFamily = jobFamily;
+    }
 
     public String getResponsibilities() {
         return responsibilities;
@@ -53,11 +56,12 @@ public class JobEntry {
         this.responsibilities = responsibilities;
     }
 
-    public JobEntry(String jobRole, String jobSpecification, String capability, String bandLevel, String responsibilities ) {
+    public JobEntry(String jobRole, String jobSpecification, String capability, String bandLevel, String jobFamily, String responsibilities ) {
         this.jobRole = jobRole;
         this.jobSpecification = jobSpecification;
         this.capability = capability;
         this.bandLevel = bandLevel;
+        this.jobFamily = jobFamily;
         this.responsibilities = responsibilities;
     }
 
@@ -67,6 +71,7 @@ public class JobEntry {
                 ", Job Specification: " + this.jobSpecification +
                 ", Capability: " + this.capability +
                 ", Band Level: " + this.bandLevel +
+                ", Job Family" + this.jobFamily +
                 ", Responsibilities: " + this.responsibilities;
     }
 }

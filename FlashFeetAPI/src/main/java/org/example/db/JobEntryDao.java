@@ -17,7 +17,7 @@ public class JobEntryDao {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT jobRole, jobSpecification, capability, bandLevel, responsibilities FROM JobRole;");
+        ResultSet rs = st.executeQuery("SELECT jobRole, jobSpecification, capability, bandLevel, jobFamily, responsibilities FROM JobRole;");
 
         List<JobEntry> jobEntryList = new ArrayList<>();
 
@@ -27,6 +27,7 @@ public class JobEntryDao {
                     rs.getString("jobSpecification"),
                     rs.getString("capability"),
                     rs.getString("bandLevel"),
+                    rs.getString("jobFamily"),
                     rs.getString("responsibilities")
             );
 
@@ -40,7 +41,7 @@ public class JobEntryDao {
         Connection c = databaseConnector.getConnection();
 
         Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery( "SELECT jobRole, jobSpecification, capability, bandLevel, responsibilities FROM JobRole WHERE JobRole = '" + jobRole +"'");
+        ResultSet rs = st.executeQuery( "SELECT jobRole, jobSpecification, capability, bandLevel, jobFamily, responsibilities FROM JobRole WHERE JobRole = '" + jobRole +"'");
 
         while (rs.next()){
             return new JobEntry(
@@ -48,6 +49,7 @@ public class JobEntryDao {
                     rs.getString("jobSpecification"),
                     rs.getString("capability"),
                     rs.getString("bandLevel"),
+                    rs.getString("jobFamily"),
                     rs.getString("responsibilities")
             );
         }

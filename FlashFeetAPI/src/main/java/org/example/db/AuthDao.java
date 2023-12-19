@@ -3,6 +3,7 @@ package org.example.db;
 import org.apache.commons.lang3.time.DateUtils;
 import org.example.cli.Login;
 import org.example.db.DatabaseConnector;
+import org.example.exception.FailedTogenerateTokenException;
 
 import java.sql.*;
 import java.util.UUID;
@@ -11,20 +12,23 @@ import java.util.Date;
 
 public class AuthDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
+    Connection connection = databaseConnector.getConnection();
 
     public boolean validLogin(Login login){
-        try(Connection c = databaseConnector.getConnection()){
-            Statement st = c.createStatement();
+        try{
+            Statement st = connection.createStatement();
 
             ResultSet rs = st.executeQuery("SELECT Password FROM `User` WHERE Username = \'" +login.getUsername()+ "\'");
 
             while(rs.next()){
                 return rs.getString("Password").equals(login.getPassword());
+
             }
         }
         catch(SQLException e){
             System.err.println(e.getMessage());
         }
+
 
         return false;
     }
@@ -35,19 +39,27 @@ public class AuthDao {
         String token = UUID.randomUUID().toString();
         Date expiry = DateUtils.addHours(new Date(), 8);
 
-        Connection c = databaseConnector.getConnection();
+        try{//connection does not open in here
+            String insertStatement = "INSERT INTO `Token` (Username, Token, Expiry) VALUES (?,?,?)";
 
-        String insertStatement = "INSERT INTO Token(Username, Token, Expiry) VALUES(?,?,?)";
+            connection.isClosed();
+            PreparedStatement st = connection.prepareStatement(insertStatement); //fails as conn is closed
 
-        PreparedStatement st = c.prepareStatement(insertStatement);
+            st.setString(1, username);
+            st.setString(2, token);
+            st.setTimestamp(3, new java.sql.Timestamp(expiry.getTime()));
 
-        st.setString(1, username);
-        st.setString(2, token);
-        st.setTimestamp(3, new java.sql.Timestamp(expiry.getTime()));
+            st.executeUpdate();
 
-        st.executeUpdate();
+            return token;
+        }
+        catch(SQLException ex){
+            ex.getMessage();
+        }
 
-        return token;
+
+
+        return null;
     }
 
 }

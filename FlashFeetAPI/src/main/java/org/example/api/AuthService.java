@@ -16,12 +16,14 @@ public class AuthService {
 
         if(authDao.validLogin(login)){
             try{
+
                 return authDao.generateToken(login.getUsername());
 
             }
             catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+
         }
         throw new FailedToLoginException();
     }

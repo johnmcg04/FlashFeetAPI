@@ -1,14 +1,15 @@
 package org.example.resources;
 
 import io.swagger.annotations.Api;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.example.api.JobEntryService;
+import org.example.cli.JobEntryRequest;
 import org.example.client.FailedToGetJobEntriesException;
+import org.example.client.FailedToUpdateJobEntryException;
+import org.example.client.InvalidJobEntryException;
 import org.example.client.JobEntryDoesNotExistException;
 
 @Api("FlashFeet Kainos Job Data API")
@@ -42,6 +43,24 @@ public class JobEntryController {
             System.err.println(e.getMessage());
 
             return Response.status(Response.Status.BAD_REQUEST).build();
+        }
+    }
+
+    @PUT
+    @Path("/job-entry/{jobRole}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateJobEntry(@PathParam("jobRole") String jobRole, JobEntryRequest jobEntry){
+        try {
+            jobEntryService.updateJobEntry(jobRole, jobEntry);
+            return Response.ok().build();
+        } catch (InvalidJobEntryException | JobEntryDoesNotExistException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (FailedToUpdateJobEntryException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
         }
     }
 

@@ -1,11 +1,9 @@
 package org.example.db;
 
 import org.example.cli.JobEntry;
+import org.example.cli.JobEntryRequest;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,5 +50,22 @@ public class JobEntryDao {
             );
         }
         return null;
+    }
+
+    public void updateJobEntry(String jobRole, JobEntryRequest jobEntry) throws SQLException{
+        Connection c = databaseConnector.getConnection();
+
+        String updateStatement = "UPDATE JobRole SET jobRole = ?, jobSpecification = ?, capability = ?, bandLevel = ?, responsibilities = ? WHERE jobRole = ?";
+
+        PreparedStatement st = c.prepareStatement(updateStatement);
+
+        st.setString(1, jobEntry.getJobRole() );
+        st.setString(2, jobEntry.getJobSpecification());
+        st.setString(3, jobEntry.getCapability());
+        st.setString(4, jobEntry.getBandLevel());
+        st.setString(5, jobEntry.getResponsibilities());
+        st.setString(6, jobRole);
+
+        st.executeUpdate();
     }
 }

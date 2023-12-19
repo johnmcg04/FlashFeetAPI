@@ -16,22 +16,23 @@ public class AuthDao {
 
     public boolean validLogin(Login login){
         try{
-            Statement st = connection.createStatement();
+            String query = "SELECT Password FROM `User` WHERE Username = ?";
+            PreparedStatement pst = connection.prepareStatement(query);
+            pst.setString(1, login.getUsername());
 
-            ResultSet rs = st.executeQuery("SELECT Password FROM `User` WHERE Username = \'" +login.getUsername()+ "\'");
+            ResultSet rs = pst.executeQuery();
 
             while(rs.next()){
                 return rs.getString("Password").equals(login.getPassword());
-
             }
         }
         catch(SQLException e){
             System.err.println(e.getMessage());
         }
 
-
         return false;
     }
+
 
 
     public String generateToken(String username) throws SQLException{

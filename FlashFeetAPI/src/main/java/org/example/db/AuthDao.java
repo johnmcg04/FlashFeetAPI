@@ -16,8 +16,8 @@ public class AuthDao {
 
     public boolean validLogin(Login login){
         try{
-            String query = "SELECT Password FROM `User` WHERE Username = ?";
-            PreparedStatement pst = connection.prepareStatement(query);
+            String qrySelectPWord = "SELECT Password FROM `User` WHERE Username = ?";
+            PreparedStatement pst = connection.prepareStatement(qrySelectPWord);
             pst.setString(1, login.getUsername());
 
             ResultSet rs = pst.executeQuery();

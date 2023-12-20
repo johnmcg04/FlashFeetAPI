@@ -5,6 +5,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import org.example.resources.BandLevelController;
 import org.example.resources.CapabilityController;
 import org.example.resources.JobEntryController;
 
@@ -34,6 +35,7 @@ public class trueApplication extends Application<trueConfiguration> {
                     final Environment environment) {
             environment.jersey().register(new JobEntryController());
             environment.jersey().register(new CapabilityController());
+            environment.jersey().register(new BandLevelController());
     }
 
 }

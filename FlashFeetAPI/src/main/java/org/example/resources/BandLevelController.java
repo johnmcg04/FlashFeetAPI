@@ -1,11 +1,10 @@
 package org.example.resources;
 
 import io.swagger.annotations.Api;
+import org.example.api.BandLevelService;
 import org.example.api.CapabilityService;
-import org.example.api.JobEntryService;
-import org.example.cli.Capability;
+import org.example.client.FailedToGetBandLevelsException;
 import org.example.client.FailedToGetCapabilitiesException;
-import org.example.client.FailedToGetJobEntriesException;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -13,19 +12,18 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
-@Api("FlashFeet Kainos Job Capability API")
+@Api("FlashFeet Kainos Job Band Level API")
 @Path("/api")
-public class CapabilityController {
-    private CapabilityService capabilityService = new CapabilityService();
+public class BandLevelController {
+    private BandLevelService bandLevelService = new BandLevelService();
 
     @GET
-    @Path("/capability-list")
+    @Path("/bandlevel-list")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllCapabilities(){
+    public Response getAllBandLevel(){
         try {
-            return Response.ok(capabilityService.getAllCapabilities()).build();
-        } catch (FailedToGetCapabilitiesException e){
+            return Response.ok(bandLevelService.getAllBandLevels()).build();
+        } catch (FailedToGetBandLevelsException e){
             System.err.println(e.getMessage());
 
             return Response.serverError().build();

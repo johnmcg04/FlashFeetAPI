@@ -12,7 +12,7 @@ import org.example.client.FailedToUpdateJobEntryException;
 import org.example.client.InvalidJobEntryException;
 import org.example.client.JobEntryDoesNotExistException;
 
-@Api("FlashFeet Kainos Job Data API")
+@Api("FlashFeet Kainos Job Entry API")
 @Path("/api")
 public class JobEntryController {
     private JobEntryService jobEntryService = new JobEntryService();

@@ -7,6 +7,7 @@ import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.example.resources.AuthController;
 import org.example.resources.JobRoleController;
+import org.example.resources.RegistrationController;
 
 public class trueApplication extends Application<trueConfiguration> {
 
@@ -32,8 +33,10 @@ public class trueApplication extends Application<trueConfiguration> {
     @Override
     public void run(final trueConfiguration configuration,
                     final Environment environment) {
-            environment.jersey().register(new JobRoleController());
-            environment.jersey().register(new AuthController());
+        environment.jersey().register(new JobRoleController());
+        environment.jersey().register(new AuthController());
+        environment.jersey().register(new RegistrationController());
+
     }
 
 }

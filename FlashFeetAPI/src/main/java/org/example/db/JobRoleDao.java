@@ -17,7 +17,7 @@ public class JobRoleDao {
 
         Statement st = connection.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT jobRole FROM JobRole");
+        ResultSet rs = st.executeQuery("SELECT jobRole FROM JobRole ORDER BY jobRole ASC;");
 
         List<JobRole> jobRoleList= new ArrayList<>();
 

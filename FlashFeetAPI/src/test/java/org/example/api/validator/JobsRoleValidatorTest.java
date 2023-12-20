@@ -17,8 +17,9 @@ class JobsRoleValidatorTest {
                 "Business Development",
                 "Business Development and Market",
                 "Manager",
-                "Develop and implement business development strategies"
-
+                "Management",
+                "Develop and implement business development strategies",
+                "null"
         );
 
 

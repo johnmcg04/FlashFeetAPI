@@ -15,7 +15,7 @@ public class JobEntryDao {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 
-        ResultSet rs = st.executeQuery("SELECT jobRole, jobSpecification, capability, bandLevel, jobFamily, responsibilities FROM JobRole;");
+        ResultSet rs = st.executeQuery("SELECT jobRole, jobSpecification, capability, bandLevel, jobFamily, responsibilities, jobSpecSummary FROM JobRole;");
 
         List<JobEntry> jobEntryList = new ArrayList<>();
 
@@ -26,7 +26,8 @@ public class JobEntryDao {
                     rs.getString("capability"),
                     rs.getString("bandLevel"),
                     rs.getString("jobFamily"),
-                    rs.getString("responsibilities")
+                    rs.getString("responsibilities"),
+                    rs.getString("jobSpecSummary")
             );
 
             jobEntryList.add(jobEntry);
@@ -39,7 +40,7 @@ public class JobEntryDao {
         Connection c = databaseConnector.getConnection();
 
         Statement st = c.createStatement();
-        ResultSet rs = st.executeQuery( "SELECT jobRole, jobSpecification, capability, bandLevel, jobFamily, responsibilities FROM JobRole WHERE JobRole = '" + jobRole +"'");
+        ResultSet rs = st.executeQuery( "SELECT jobRole, jobSpecification, capability, bandLevel, jobFamily, responsibilities, jobSpecSummary FROM JobRole WHERE JobRole = '" + jobRole +"'");
 
         while (rs.next()){
             return new JobEntry(
@@ -48,7 +49,8 @@ public class JobEntryDao {
                     rs.getString("capability"),
                     rs.getString("bandLevel"),
                     rs.getString("jobFamily"),
-                    rs.getString("responsibilities")
+                    rs.getString("responsibilities"),
+                    rs.getString("jobSpecSummary")
             );
         }
         return null;
@@ -57,7 +59,7 @@ public class JobEntryDao {
     public void updateJobEntry(String jobRole, JobEntryRequest jobEntry) throws SQLException{
         Connection c = databaseConnector.getConnection();
 
-        String updateStatement = "UPDATE JobRole SET jobRole = ?, jobSpecification = ?, capability = ?, bandLevel = ?, responsibilities = ? WHERE jobRole = ?";
+        String updateStatement = "UPDATE JobRole SET jobRole = ?, jobSpecification = ?, capability = ?, bandLevel = ?, responsibilities = ?, jobSpecSummary = ? WHERE jobRole = ?";
 
         PreparedStatement st = c.prepareStatement(updateStatement);
 
@@ -66,7 +68,8 @@ public class JobEntryDao {
         st.setString(3, jobEntry.getCapability());
         st.setString(4, jobEntry.getBandLevel());
         st.setString(5, jobEntry.getResponsibilities());
-        st.setString(6, jobRole);
+        st.setString(6, jobEntry.getJobSpecSummary());
+        st.setString(7, jobRole);
 
         st.executeUpdate();
     }

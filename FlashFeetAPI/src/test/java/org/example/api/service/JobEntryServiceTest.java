@@ -23,6 +23,7 @@ public class JobEntryServiceTest {
                 "Test Specification",
                 "Test capability",
                 "Test bandLevel",
+                "Test jobFamily",
                 "Test responsibility"
         );
 

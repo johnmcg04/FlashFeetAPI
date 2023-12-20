@@ -10,13 +10,13 @@ public class JobEntryRequest {
     private String jobRole;
     private String jobSpecification;
     private String capability;
+    private String bandLevel;
+    private String jobFamily;
+    private String responsibilities;
+    private String jobSpecSummary;
     public String getJobRole() {
         return jobRole;
     }
-    private String bandLevel;
-
-
-    private String responsibilities;
 
     public void setJobRole(String jobRole) {
         this.jobRole = jobRole;
@@ -45,16 +45,16 @@ public class JobEntryRequest {
     public void setBandLevel(String bandLevel) {
         this.bandLevel = bandLevel;
     }
-
-
-
+    public String getJobFamily() { return jobFamily; }
+    public void setJobFamily(String jobFamily ) { this.jobFamily = jobFamily; }
     public String getResponsibilities() {
         return responsibilities;
     }
-
     public void setResponsibilities(String responsibilities) {
         this.responsibilities = responsibilities;
     }
+    public String getJobSpecSummary() { return jobSpecSummary; }
+    public void setJobSpecSummary(String jobSpecSummary) { this.jobSpecSummary = jobSpecSummary; }
 
     @JsonCreator
     public JobEntryRequest(
@@ -62,12 +62,18 @@ public class JobEntryRequest {
             @JsonProperty("jobSpecification") String jobSpecification,
             @JsonProperty("capability") String capability,
             @JsonProperty("bandLevel") String bandLevel,
-            @JsonProperty("responsibilities") String responsibilities
+            @JsonProperty("jobFamily") String jobFamily,
+            @JsonProperty("responsibilities") String responsibilities,
+            @JsonProperty("jobSpecSummary") String jobSpecSummary
             ){
         this.jobRole= jobRole;
         this.jobSpecification = jobSpecification;
         this.capability = capability;
         this.bandLevel = bandLevel;
+        this.jobFamily = jobFamily;
         this.responsibilities = responsibilities;
+        this.jobSpecSummary = jobSpecSummary;
     }
+
+
 }

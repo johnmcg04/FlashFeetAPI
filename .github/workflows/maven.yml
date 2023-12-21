@@ -10,9 +10,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "US000-API-Repo-Setup" ]
+    branches: [ "US000-API-Setup" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "US000-API-Setup" ]
 
 jobs:
   build:

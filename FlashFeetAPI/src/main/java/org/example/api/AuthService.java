@@ -28,4 +28,11 @@ public class AuthService {
         throw new FailedToLoginException();
     }
 
+    public boolean chkAdminStatus(String username) throws FailedToLoginException, FailedTogenerateTokenException {
+        boolean isAdmin = false;
+        if(authDao.isAdmin(username)){
+            return isAdmin = true;
+        }
+        else{ return isAdmin;}
+    }
 }

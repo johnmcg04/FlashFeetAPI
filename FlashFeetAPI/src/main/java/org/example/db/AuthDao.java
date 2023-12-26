@@ -33,8 +33,6 @@ public class AuthDao {
         return false;
     }
 
-
-
     public String generateToken(String username) throws SQLException{
 
         String token = UUID.randomUUID().toString();
@@ -57,11 +55,29 @@ public class AuthDao {
         catch(SQLException ex){
             ex.getMessage();
         }
-
-
-
         return null;
     }
 
+    public boolean isAdmin(String username){
+        int roleIdForAdmin = 1;
+        int result = 0;
+        try{
+            String qrySelectUsername = "SELECT RoleID FROM `User` WHERE Username = ?";
+            PreparedStatement pst = connection.prepareStatement(qrySelectUsername);
+            pst.setString(1, username);
+
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                result = rs.getInt("RoleID");
+                if(result == roleIdForAdmin){
+                    return true;
+                }
+            }
+        }
+        catch(SQLException e){
+            System.err.println(e.getMessage());
+        }
+        return false;
+    }
 }
 

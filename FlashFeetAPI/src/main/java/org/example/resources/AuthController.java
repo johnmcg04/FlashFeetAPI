@@ -1,18 +1,18 @@
 package org.example.resources;
 
-
 import io.swagger.annotations.Api;
 import org.example.api.AuthService;
 import org.example.cli.Login;
+import org.example.client.FailedToGetJobsException;
+import org.example.db.DatabaseConnector;
 import org.example.exception.FailedToLoginException;
 import org.example.exception.FailedTogenerateTokenException;
 
 
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 
 @Api("DropWizard Auth API")
 @Path("/api")
@@ -37,5 +37,16 @@ public class AuthController {
         }
     }
 
+    @POST
+    @Path("/checkIsAdmin")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAdminStatus(String username){
+        try {
+            Boolean isAdmin = authService.chkAdminStatus(username); //could change this to INT for further levels of security clearance
+            return Response.ok(isAdmin).build();
+        } catch (FailedToLoginException | FailedTogenerateTokenException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

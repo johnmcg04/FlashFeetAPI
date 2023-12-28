@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import org.example.api.AuthService;
 import org.example.cli.Login;
 import org.example.client.FailedToGetJobsException;
+import org.example.client.FailedToVerifyTokenException;
 import org.example.db.DatabaseConnector;
 import org.example.exception.FailedToLoginException;
 import org.example.exception.FailedTogenerateTokenException;
@@ -40,11 +41,11 @@ public class AuthController {
     @POST
     @Path("/checkIsAdmin")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAdminStatus(String username){
+    public Response getAdminStatus(String token){
         try {
-            Boolean isAdmin = authService.chkAdminStatus(username); //could change this to INT for further levels of security clearance
+            Boolean isAdmin = authService.isTokenAdmin(token);
             return Response.ok(isAdmin).build();
-        } catch (FailedToLoginException | FailedTogenerateTokenException e) {
+        } catch (SQLException | FailedToVerifyTokenException e) {
             throw new RuntimeException(e);
         }
     }

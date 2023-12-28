@@ -84,9 +84,9 @@ public class AuthDao {
         Statement st = connection.createStatement();
 
         String sqlQuery = "SELECT RoleID, Expiry FROM `User` join `Token` using (Username)" +
-                " WHERE Token = ?";
-        PreparedStatement pst = connection.prepareStatement(sqlQuery);
-        pst.setString(1, token);
+                " WHERE Token = '" + token + "';";
+//        PreparedStatement pst = connection.prepareStatement(sqlQuery);
+//        pst.setString(1, token);
 
         ResultSet rs = st.executeQuery(sqlQuery);
 

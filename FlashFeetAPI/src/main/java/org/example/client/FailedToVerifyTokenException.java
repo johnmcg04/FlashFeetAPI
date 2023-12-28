@@ -6,4 +6,3 @@ public class FailedToVerifyTokenException extends Throwable {
         return "Failed to verify token";
     }
 }
-}

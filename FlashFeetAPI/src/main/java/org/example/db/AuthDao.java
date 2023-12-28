@@ -1,5 +1,6 @@
 package org.example.db;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import org.apache.commons.lang3.time.DateUtils;
 import org.example.cli.Login;
 import org.example.db.DatabaseConnector;
@@ -53,9 +54,8 @@ public class AuthDao {
             return token;
         }
         catch(SQLException ex){
-            ex.getMessage();
+            throw new SQLException();
         }
-        return null;
     }
 
     public boolean isAdmin(String username){
@@ -78,6 +78,30 @@ public class AuthDao {
             System.err.println(e.getMessage());
         }
         return false;
+    }
+
+    public int getRoleIdFromToken(String token) throws Exception {
+        Statement st = connection.createStatement();
+
+        String sqlQuery = "SELECT RoleID, Expiry FROM `User` join `Token` using (Username)" +
+                " WHERE Token = ?";
+        PreparedStatement pst = connection.prepareStatement(sqlQuery);
+        pst.setString(1, token);
+
+        ResultSet rs = st.executeQuery(sqlQuery);
+
+        while(rs.next()){
+            Timestamp expiry = rs.getTimestamp("Expiry");
+
+            if(expiry.after(new Date())){
+                return rs.getInt("RoleID"); //return the role id of the users token
+            }
+            else{
+                throw new Exception();
+            }
+
+        }
+        return -1;
     }
 }
 

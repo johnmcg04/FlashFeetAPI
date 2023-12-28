@@ -2,6 +2,7 @@ package org.example.api;
 
 
 import org.example.cli.Login;
+import org.example.client.FailedToVerifyTokenException;
 import org.example.db.AuthDao;
 import org.example.exception.FailedToLoginException;
 import org.example.exception.FailedTogenerateTokenException;
@@ -34,5 +35,21 @@ public class AuthService {
             return isAdmin = true;
         }
         else{ return isAdmin;}
+    }
+
+    public boolean isTokenAdmin(String token) throws SQLException, FailedToVerifyTokenException {
+        try{
+            int roleId = authDao.getRoleIdFromToken(token);
+
+            if(roleId == 1){
+                return true; //token is an admin
+            }
+        }
+        catch(SQLException ex){
+            throw new FailedToVerifyTokenException();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return false;
     }
 }

@@ -1,10 +1,7 @@
 package org.example.db;
 
-import com.auth0.jwt.exceptions.TokenExpiredException;
 import org.apache.commons.lang3.time.DateUtils;
 import org.example.cli.Login;
-import org.example.db.DatabaseConnector;
-import org.example.exception.FailedTogenerateTokenException;
 
 import java.sql.*;
 import java.util.UUID;
@@ -15,7 +12,7 @@ public class AuthDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
     Connection connection = databaseConnector.getConnection();
 
-    public boolean validLogin(Login login){
+    public boolean validLogin(Login login, Connection c){
         try{
             String qrySelectPWord = "SELECT Password FROM `User` WHERE Username = ?";
             PreparedStatement pst = connection.prepareStatement(qrySelectPWord);
@@ -34,7 +31,7 @@ public class AuthDao {
         return false;
     }
 
-    public String generateToken(String username) throws SQLException{
+    public String generateToken(String username, Connection c) throws SQLException{
 
         String token = UUID.randomUUID().toString();
         Date expiry = DateUtils.addHours(new Date(), 8);
@@ -58,7 +55,7 @@ public class AuthDao {
         }
     }
 
-    public boolean isAdmin(String username){
+    public boolean isAdmin(String username, Connection c){
         int roleIdForAdmin = 1;
         int result = 0;
         try{

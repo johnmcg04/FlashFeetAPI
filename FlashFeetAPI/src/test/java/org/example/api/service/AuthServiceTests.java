@@ -2,18 +2,13 @@ package org.example.api.service;
 
 import org.example.api.AuthService;
 import org.example.cli.Login;
-import org.example.client.FailedToGetJobsException;
-import org.example.client.FailedToVerifyTokenException;
 import org.example.db.AuthDao;
 import org.example.db.DatabaseConnector;
-import org.example.exception.DatabaseConnectionException;
 import org.example.exception.FailedToLoginException;
 import org.example.exception.FailedTogenerateTokenException;
-import org.example.exception.JobRoleDoesNotExistException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Connection;
@@ -53,6 +48,9 @@ public class AuthServiceTests {
         when(authDao.validLogin(inValidLogin, c)).thenReturn(Boolean.FALSE);
         assertThrows(FailedToLoginException.class, () -> authService.login(inValidLogin));
     }
+
+
+
 }
 
 

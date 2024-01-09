@@ -17,7 +17,7 @@ import java.sql.SQLException;
 @Api("DropWizard Auth API")
 @Path("/api")
 public class SignUpController {
-    private SignUpService authService = new SignUpService();
+    private SignUpService signUpService = new SignUpService();
 
     @POST
     @Path("/signup")
@@ -34,6 +34,8 @@ public class SignUpController {
             System.err.println(e.getMessage());
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

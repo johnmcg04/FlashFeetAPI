@@ -13,8 +13,8 @@ import java.sql.SQLException;
 
 public class SignUpService {
     private SignUpDao authDao = new SignUpDao();
-    private DatabaseConnector databaseConnector = new DatabaseConnector();
-    Connection c = databaseConnector.getConnection();
+    private static DatabaseConnector databaseConnector = new DatabaseConnector();
+    static Connection c = databaseConnector.getConnection();
 
     public SignUpService(){
 
@@ -29,19 +29,5 @@ public class SignUpService {
         return SignUpDao.signUpUser(signUp, c); //returns -1 if failed to insert else 1 if valid insert
     }
 
-    public boolean isTokenAdmin(String token) throws SQLException, FailedToVerifyTokenException {
-        try{
-            int roleId = authDao.getRoleIdFromToken(token);
 
-            if(roleId == 1){
-                return true; //token is an admin
-            }
-        }
-        catch(SQLException ex){
-            throw new FailedToVerifyTokenException();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return false;
-    }
 }

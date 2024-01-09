@@ -15,7 +15,7 @@ public class SignUpDao {
 
     public static int signUpUser(SignUp signUp, Connection c) {
         try {
-            String qryInsertSignUpDetails = "INSERT INTO `User` (Username, Password, RoleID) VALUES(?,?,1);";
+            String qryInsertSignUpDetails = "INSERT INTO `User` (Username, Password, RoleID) VALUES(?,?,2);";
             PreparedStatement preparedStatement = c.prepareStatement(qryInsertSignUpDetails);
             preparedStatement.setString(1, signUp.getUsername());
             preparedStatement.setString(2, signUp.getPassword());

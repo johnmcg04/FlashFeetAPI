@@ -30,7 +30,7 @@ public class SignUpService {
         //call hashing and salting method here
         try{
             //password validation here
-
+            validSignUpPassword(signUp.getPassword());
             SignUp saltedSignUpDetails = SignUpService.SaltUsernameAndPassword(signUp);
             SignUp hashedSignUpDetails = SignUpService.HashPassword(saltedSignUpDetails);
             return SignUpDao.signUpUser(hashedSignUpDetails, c); //returns false if failed to insert else true if valid insert
@@ -38,7 +38,9 @@ public class SignUpService {
         catch(){
 
         }
+    }
 
+    public static boolean validSignUpPassword(String password){
 
     }
 

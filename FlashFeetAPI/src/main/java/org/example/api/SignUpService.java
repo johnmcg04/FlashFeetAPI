@@ -43,7 +43,7 @@ public class SignUpService {
     public static SignUp HashUsernameAndPassword(SignUp saltedUsernameAndPassword) throws Exception {
         String salt = saltedUsernameAndPassword.getSalt();
         String password = saltedUsernameAndPassword.getPassword();
-        String hashedPassword = hashPassword(password, salt);
+        String hashedPassword = HashPassword(password, salt);
         saltedUsernameAndPassword.setPassword(hashedPassword);
         return saltedUsernameAndPassword;
     }
@@ -55,16 +55,27 @@ public class SignUpService {
         return Base64.getEncoder().encodeToString(salt);
     }
 
-    public static String hashPassword(String password, String salt) throws Exception {
-        int iterations = 65536;
-        int keyLength = 512;
-        char[] passwordChars = password.toCharArray();
-        byte[] saltBytes = salt.getBytes(StandardCharsets.UTF_8);
+    public static String HashPassword(String password, String salt) throws Exception {
+        if (password == null || salt == null) {
+            throw new IllegalArgumentException("Password or salt is null");
+        }
+        try {
+//            int iterations = 65536;
+//            int keyLength = 512;
+            int iterations = 1000;  // Temporary lower value for debugging
+            int keyLength = 256;    // Temporary lower value for debugging
+            char[] passwordChars = password.toCharArray();
+            byte[] saltBytes = salt.getBytes(StandardCharsets.UTF_8);
 
-        PBEKeySpec spec = new PBEKeySpec(passwordChars, saltBytes, iterations, keyLength);
-        SecretKeyFactory key = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-        byte[] hashedPassword = key.generateSecret(spec).getEncoded();
+            PBEKeySpec spec = new PBEKeySpec(passwordChars, saltBytes, iterations, keyLength);
+            SecretKeyFactory key = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+            byte[] hashedPassword = key.generateSecret(spec).getEncoded();
 
-        return Base64.getEncoder().encodeToString(hashedPassword);
+            return Base64.getEncoder().encodeToString(hashedPassword);
+
+        } catch (Exception e) {
+            e.printStackTrace();  // Print the exception details to the console
+            throw new Exception("Error hashing password");
+        }
     }
 }

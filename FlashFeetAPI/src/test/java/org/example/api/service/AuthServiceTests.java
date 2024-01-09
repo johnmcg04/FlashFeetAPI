@@ -1,8 +1,8 @@
 package org.example.api.service;
 
-import org.example.api.AuthService;
+import org.example.api.SignUpService;
 import org.example.cli.Login;
-import org.example.db.AuthDao;
+import org.example.db.SignUpDao;
 import org.example.db.DatabaseConnector;
 import org.example.exception.FailedToLoginException;
 import org.example.exception.FailedTogenerateTokenException;
@@ -21,10 +21,10 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 public class AuthServiceTests {
 
-    AuthDao authDao = mock(AuthDao.class);
+    SignUpDao authDao = mock(SignUpDao.class);
     DatabaseConnector databaseConnector = mock(DatabaseConnector.class);
 
-    AuthService authService = new AuthService(authDao, databaseConnector);
+    SignUpService authService = new SignUpService(authDao, databaseConnector);
 
     private final Connection c = mock(Connection.class);
 

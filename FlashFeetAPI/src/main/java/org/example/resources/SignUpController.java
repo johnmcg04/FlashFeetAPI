@@ -1,11 +1,10 @@
 package org.example.resources;
 
 import io.swagger.annotations.Api;
-import org.example.api.AuthService;
+import org.example.api.SignUpService;
 import org.example.cli.Login;
-import org.example.client.FailedToGetJobsException;
+import org.example.cli.SignUp;
 import org.example.client.FailedToVerifyTokenException;
-import org.example.db.DatabaseConnector;
 import org.example.exception.FailedToLoginException;
 import org.example.exception.FailedTogenerateTokenException;
 
@@ -17,15 +16,15 @@ import java.sql.SQLException;
 
 @Api("DropWizard Auth API")
 @Path("/api")
-public class AuthController {
-    private AuthService authService = new AuthService();
+public class SignUpController {
+    private SignUpService authService = new SignUpService();
 
     @POST
-    @Path("/login")
+    @Path("/signup")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(Login login){
+    public Response SignUp(SignUp signUp){
         try{
-            return Response.ok(authService.login(login)).build();
+            return Response.ok(SignUpService.signUpUser(signUp)).build();
         }
         catch (FailedTogenerateTokenException e) {
             System.err.println(e.getMessage());
@@ -35,18 +34,6 @@ public class AuthController {
             System.err.println(e.getMessage());
 
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
-        }
-    }
-
-    @POST
-    @Path("/checkIsAdmin")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getAdminStatus(String token){
-        try {
-            Boolean isAdmin = authService.isTokenAdmin(token);
-            return Response.ok(isAdmin).build();
-        } catch (SQLException | FailedToVerifyTokenException e) {
-            throw new RuntimeException(e);
         }
     }
 

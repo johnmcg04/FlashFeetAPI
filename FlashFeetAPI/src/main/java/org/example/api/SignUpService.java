@@ -44,7 +44,7 @@ public class SignUpService {
         String salt = saltedPassword.getSalt();
         String password = saltedPassword.getPassword();
         String hashedPassword = HashPassword(password, salt);
-        saltedPassword.setPassword(hashedPassword);
+        saltedPassword.setPassword(hashedPassword); //have right hash
         return saltedPassword;
     }
 

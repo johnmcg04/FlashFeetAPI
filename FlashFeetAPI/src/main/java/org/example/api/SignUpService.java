@@ -26,12 +26,20 @@ public class SignUpService {
     public SignUpService(SignUpDao signUpDao, DatabaseConnector databaseConnector) {
     }
 
-    public static int signUpUser(SignUp signUp) throws FailedToLoginException, FailedTogenerateTokenException, Exception {
+    public static boolean signUpUser(SignUp signUp) throws FailedToLoginException, FailedTogenerateTokenException, Exception {
         //call hashing and salting method here
-        SignUp saltedSignUpDetails = SignUpService.SaltUsernameAndPassword(signUp);
-        SignUp hashedSignUpDetails = SignUpService.HashPassword(saltedSignUpDetails);
+        try{
+            //password validation here
 
-        return SignUpDao.signUpUser(hashedSignUpDetails, c); //returns -1 if failed to insert else 1 if valid insert
+            SignUp saltedSignUpDetails = SignUpService.SaltUsernameAndPassword(signUp);
+            SignUp hashedSignUpDetails = SignUpService.HashPassword(saltedSignUpDetails);
+            return SignUpDao.signUpUser(hashedSignUpDetails, c); //returns false if failed to insert else true if valid insert
+        }
+        catch(){
+
+        }
+
+
     }
 
     public static SignUp SaltUsernameAndPassword(SignUp signUpDetails) {

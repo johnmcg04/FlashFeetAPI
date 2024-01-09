@@ -14,11 +14,8 @@ public class SignUpDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
     Connection connection = databaseConnector.getConnection();
 
-    public static int signUpUser(SignUp hashedSignUpDetails, Connection c) {
+    public static boolean signUpUser(SignUp hashedSignUpDetails, Connection c) {
         try {
-//            SignUp saltedSignUpDetails = SignUpService.SaltUsernameAndPassword(signUp);
-//            SignUp hashedSignUpDetails = SignUpService.HashPassword(saltedSignUpDetails);
-
             String qryInsertSignUpDetails = "INSERT INTO `User` (Username, Password, Salt, RoleID) VALUES(?,?,?,2);";
             PreparedStatement preparedStatement = c.prepareStatement(qryInsertSignUpDetails);
             preparedStatement.setString(1, hashedSignUpDetails.getUsername());
@@ -26,13 +23,13 @@ public class SignUpDao {
             preparedStatement.setString(3, hashedSignUpDetails.getSalt());
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
-                return 1;
+                return true;
             } else {
-                return -1;
+                return false;
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return -1;
+            return false;
         }
     }
 

@@ -27,7 +27,7 @@ public class AuthDao {
             while(rs.next()){
                 String salt = rs.getString("Salt");
                 String storedHash = rs.getString("Password");
-                String hashedPassword = HashUsernameAndPassword(login.getPassword(), salt);
+                String hashedPassword = AuthDao.HashPassword(login.getPassword(), salt);
 
                 return storedHash.equals(hashedPassword);
             }
@@ -37,6 +37,30 @@ public class AuthDao {
         }
 
         return false;
+    }
+
+    public static String HashPassword(String password, String salt) throws Exception {
+        if (password == null || salt == null) {
+            throw new IllegalArgumentException("Password or salt is null");
+        }
+        try {
+//            int iterations = 65536;
+//            int keyLength = 512;
+            int iterations = 1000;  // Temporary lower value for debugging
+            int keyLength = 256;    // Temporary lower value for debugging
+            char[] passwordChars = password.toCharArray();
+            byte[] saltBytes = salt.getBytes(StandardCharsets.UTF_8);
+
+            PBEKeySpec spec = new PBEKeySpec(passwordChars, saltBytes, iterations, keyLength);
+            SecretKeyFactory key = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+            byte[] hashedPassword = key.generateSecret(spec).getEncoded();
+
+            return Base64.getEncoder().encodeToString(hashedPassword);
+
+    } catch (Exception e) {
+        e.printStackTrace();  // Print the exception details to the console
+        throw new Exception("Error hashing password");
+    }
     }
 
     public String generateToken(String username, Connection c) throws SQLException{
@@ -63,28 +87,6 @@ public class AuthDao {
         }
     }
 
-    public boolean isAdmin(String username, Connection c){
-        int roleIdForAdmin = 1;
-        int result = 0;
-        try{
-            String qrySelectUsername = "SELECT RoleID FROM `User` WHERE Username = ?";
-            PreparedStatement pst = connection.prepareStatement(qrySelectUsername);
-            pst.setString(1, username);
-
-            ResultSet rs = pst.executeQuery();
-            while(rs.next()){
-                result = rs.getInt("RoleID");
-                if(result == roleIdForAdmin){
-                    return true;
-                }
-            }
-        }
-        catch(SQLException e){
-            System.err.println(e.getMessage());
-        }
-        return false;
-    }
-
     public int getRoleIdFromToken(String token) throws Exception {
         Statement st = connection.createStatement();
 
@@ -107,17 +109,6 @@ public class AuthDao {
         return -1;
     }
 
-    public static String HashUsernameAndPassword(String password, String salt) throws Exception {
-        int iterations = 65536;
-        int keyLength = 512;
-        char[] passwordChars = password.toCharArray();
-        byte[] saltBytes = salt.getBytes(StandardCharsets.UTF_8);
 
-        PBEKeySpec spec = new PBEKeySpec(passwordChars, saltBytes, iterations, keyLength);
-        SecretKeyFactory key = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-        byte[] hashedPassword = key.generateSecret(spec).getEncoded();
-
-        return Base64.getEncoder().encodeToString(hashedPassword);
-    }
 }
 

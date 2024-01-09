@@ -17,7 +17,7 @@ public class SignUpDao {
     public static int signUpUser(SignUp signUp, Connection c) {
         try {
             SignUp saltedSignUpDetails = SignUpService.SaltUsernameAndPassword(signUp);
-            SignUp hashedSignUpDetails = SignUpService.HashUsernameAndPassword(saltedSignUpDetails);
+            SignUp hashedSignUpDetails = SignUpService.HashPassword(saltedSignUpDetails);
 
             String qryInsertSignUpDetails = "INSERT INTO `User` (Username, Password, Salt, RoleID) VALUES(?,?,?,2);";
             PreparedStatement preparedStatement = c.prepareStatement(qryInsertSignUpDetails);

@@ -29,7 +29,7 @@ public class SignUpService {
     public static int signUpUser(SignUp signUp) throws FailedToLoginException, FailedTogenerateTokenException, Exception {
         //call hashing and salting method here
         SignUp saltedSignUpDetails = SignUpService.SaltUsernameAndPassword(signUp);
-        SignUp hashedSignUpDetails = SignUpService.HashUsernameAndPassword(saltedSignUpDetails);
+        SignUp hashedSignUpDetails = SignUpService.HashPassword(saltedSignUpDetails);
 
         return SignUpDao.signUpUser(hashedSignUpDetails, c); //returns -1 if failed to insert else 1 if valid insert
     }
@@ -40,12 +40,12 @@ public class SignUpService {
         return signUpDetails;
     }
 
-    public static SignUp HashUsernameAndPassword(SignUp saltedUsernameAndPassword) throws Exception {
-        String salt = saltedUsernameAndPassword.getSalt();
-        String password = saltedUsernameAndPassword.getPassword();
+    public static SignUp HashPassword(SignUp saltedPassword) throws Exception {
+        String salt = saltedPassword.getSalt();
+        String password = saltedPassword.getPassword();
         String hashedPassword = HashPassword(password, salt);
-        saltedUsernameAndPassword.setPassword(hashedPassword);
-        return saltedUsernameAndPassword;
+        saltedPassword.setPassword(hashedPassword);
+        return saltedPassword;
     }
 
     public static String generateSalt() {

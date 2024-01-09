@@ -39,20 +39,6 @@ public class AuthDao {
         return false;
     }
 
-    public static String HashUsernameAndPassword(String password, String salt) throws Exception {
-        int iterations = 65536;
-        int keyLength = 512;
-        char[] passwordChars = password.toCharArray();
-        byte[] saltBytes = salt.getBytes(StandardCharsets.UTF_8);
-
-        PBEKeySpec spec = new PBEKeySpec(passwordChars, saltBytes, iterations, keyLength);
-        SecretKeyFactory key = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
-        byte[] hashedPassword = key.generateSecret(spec).getEncoded();
-
-        return Base64.getEncoder().encodeToString(hashedPassword);
-    }
-
-
     public String generateToken(String username, Connection c) throws SQLException{
 
         String token = UUID.randomUUID().toString();
@@ -104,8 +90,6 @@ public class AuthDao {
 
         String sqlQuery = "SELECT RoleID, Expiry FROM `User` join `Token` using (Username)" +
                 " WHERE Token = '" + token + "';";
-//        PreparedStatement pst = connection.prepareStatement(sqlQuery);
-//        pst.setString(1, token);
 
         ResultSet rs = st.executeQuery(sqlQuery);
 
@@ -121,6 +105,19 @@ public class AuthDao {
 
         }
         return -1;
+    }
+
+    public static String HashUsernameAndPassword(String password, String salt) throws Exception {
+        int iterations = 65536;
+        int keyLength = 512;
+        char[] passwordChars = password.toCharArray();
+        byte[] saltBytes = salt.getBytes(StandardCharsets.UTF_8);
+
+        PBEKeySpec spec = new PBEKeySpec(passwordChars, saltBytes, iterations, keyLength);
+        SecretKeyFactory key = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA512");
+        byte[] hashedPassword = key.generateSecret(spec).getEncoded();
+
+        return Base64.getEncoder().encodeToString(hashedPassword);
     }
 }
 

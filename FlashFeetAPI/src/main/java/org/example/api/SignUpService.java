@@ -5,6 +5,7 @@ import org.example.cli.SignUp;
 import org.example.db.SignUpDao;
 import org.example.db.DatabaseConnector;
 import org.example.exception.FailedToLoginException;
+import org.example.exception.FailedToSignUpException;
 import org.example.exception.FailedTogenerateTokenException;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
@@ -14,6 +15,8 @@ import javax.crypto.spec.PBEKeySpec;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignUpService {
     private SignUpDao signUpDao = new SignUpDao();
@@ -26,22 +29,34 @@ public class SignUpService {
     public SignUpService(SignUpDao signUpDao, DatabaseConnector databaseConnector) {
     }
 
-    public static boolean signUpUser(SignUp signUp) throws FailedToLoginException, FailedTogenerateTokenException, Exception {
+    public static boolean signUpUser(SignUp signUp) throws FailedToSignUpException, FailedTogenerateTokenException, Exception {
         //call hashing and salting method here
         try{
             //password validation here
-            validSignUpPassword(signUp.getPassword());
+            if(!validSignUpPassword(signUp.getPassword())){
+                return false;
+            }
             SignUp saltedSignUpDetails = SignUpService.SaltUsernameAndPassword(signUp);
             SignUp hashedSignUpDetails = SignUpService.HashPassword(saltedSignUpDetails);
             return SignUpDao.signUpUser(hashedSignUpDetails, c); //returns false if failed to insert else true if valid insert
         }
-        catch(){
-
+        catch(FailedToSignUpException ex){
+            ex.getMessage();
         }
+        return false;
     }
 
-    public static boolean validSignUpPassword(String password){
+    public static boolean validSignUpPassword(String password) {
+        // Check for at least 8 characters
+        if (password.length() < 8) {
+            return false;
+        }
+        // Check for at least 1 special character, 1 upper case, 1 lower case, and 1 digit
+        String regex = "^(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).+$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(password);
 
+        return matcher.matches();
     }
 
     public static SignUp SaltUsernameAndPassword(SignUp signUpDetails) {

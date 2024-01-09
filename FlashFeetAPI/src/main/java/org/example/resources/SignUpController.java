@@ -30,10 +30,6 @@ public class SignUpController {
             System.err.println(e.getMessage());
 
             return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
-        } catch (FailedToLoginException e) {
-            System.err.println(e.getMessage());
-
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

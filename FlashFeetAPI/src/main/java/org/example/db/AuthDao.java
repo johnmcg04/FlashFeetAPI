@@ -60,7 +60,7 @@ public class AuthDao {
     } catch (Exception e) {
         e.printStackTrace();  // Print the exception details to the console
         throw new Exception("Error hashing password");
-    }
+        }
     }
 
     public String generateToken(String username, Connection c) throws SQLException{

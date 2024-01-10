@@ -31,7 +31,7 @@ public class AuthServiceTests {
     @Test
     @DisplayName("Testing valid login details")
     public void login_ShouldReturnTrue_WhenValidLoginReturnsTrue() throws SQLException, FailedTogenerateTokenException, FailedToLoginException {
-        Login validLogin = new Login("user","password");
+        Login validLogin = new Login("User123!","User123!");
         when(databaseConnector.getConnection()).thenReturn(c);
         when(authDao.validLogin(validLogin, c)).thenReturn(Boolean.TRUE);
         if(authService.login(validLogin) instanceof String){ //returns a string i.e. returns the token

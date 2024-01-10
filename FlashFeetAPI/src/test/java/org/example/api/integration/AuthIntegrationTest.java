@@ -43,7 +43,7 @@ public class AuthIntegrationTest {
     @Test
     @DisplayName("Valid Login should return a OK response")
     public void authLogin_ShouldAllowLogin_WhenValidLoginDetailsEntered() {
-        Login invalidLogin = new Login("user", "password");
+        Login invalidLogin = new Login("User123!", "User123!");
 
         Response response = APP.client().target("http://localhost:8080/api/login")
                 .request()
@@ -53,12 +53,12 @@ public class AuthIntegrationTest {
     }
 
     /**
-     * Tests if an invalid login returns a bad response.
+     * All Tests if an invalid login returns a bad response.
      */
     @Test
     @DisplayName("Invalid Login should return a bad response")
-    public void authLogin_ShouldThrowError_WhenInvalidLoginDetailsEntered() {
-        Login invalidLogin = new Login("invalidUsername64hvhjvhjvhjvfg85fouydwygwej!!!weurvbi", "InvalidPasswordhjvrekhbrchjvcjlbn");
+    public void authLogin_ShouldThrowError_WhenPasswordDoesNotContainDigit() {
+        Login invalidLogin = new Login("ValidUserName", "InvalidPassword!");
 
         Response response = APP.client().target("http://localhost:8080/api/login")
                 .request()
@@ -66,5 +66,55 @@ public class AuthIntegrationTest {
 
         assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus()); //500 code returned
     }
+
+    @Test
+    @DisplayName("Invalid Login should return a bad response")
+    public void authLogin_ShouldThrowError_WhenPasswordDoesNotContainLowerCaseLetter() {
+        Login invalidLogin = new Login("ValidUserName", "INVALIDPASSWORD!123");
+
+        Response response = APP.client().target("http://localhost:8080/api/login")
+                .request()
+                .post(Entity.entity(invalidLogin, MediaType.APPLICATION_JSON_TYPE));
+
+        assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus()); //500 code returned
+    }
+
+    @Test
+    @DisplayName("Invalid Login should return a bad response")
+    public void authLogin_ShouldThrowError_WhenPasswordDoesNotUppercaseLetter() {
+        Login invalidLogin = new Login("ValidUserName", "invalidpassword123!");
+
+        Response response = APP.client().target("http://localhost:8080/api/login")
+                .request()
+                .post(Entity.entity(invalidLogin, MediaType.APPLICATION_JSON_TYPE));
+
+        assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus()); //500 code returned
+    }
+
+    @Test
+    @DisplayName("Invalid Login should return a bad response")
+    public void authLogin_ShouldThrowError_WhenPasswordDoesNotContainSpecialCharacter() {
+        Login invalidLogin = new Login("ValidUserName", "InvalidPassword123");
+
+        Response response = APP.client().target("http://localhost:8080/api/login")
+                .request()
+                .post(Entity.entity(invalidLogin, MediaType.APPLICATION_JSON_TYPE));
+
+        assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus()); //500 code returned
+    }
+
+    @Test
+    @DisplayName("Invalid Login should return a bad response")
+    public void authLogin_ShouldThrowError_WhenPasswordDoesNotHaveAMinimumLengthOfCharacters() {
+        Login invalidLogin = new Login("ValidUserName", "Pword1!");
+
+        Response response = APP.client().target("http://localhost:8080/api/login")
+                .request()
+                .post(Entity.entity(invalidLogin, MediaType.APPLICATION_JSON_TYPE));
+
+        assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus()); //500 code returned
+    }
+
+
 }
 

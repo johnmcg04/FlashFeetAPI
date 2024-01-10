@@ -43,7 +43,6 @@ public class JobRoleController {
     @Path("/delete-job-role/{jobRole}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteJobRole(@PathParam("jobRole") String jobRole) {
-        System.out.println(jobRole);
         try {
             jobRoleService.deleteJobRole(jobRole);
 

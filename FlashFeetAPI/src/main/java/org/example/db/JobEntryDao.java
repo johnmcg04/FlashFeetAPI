@@ -59,7 +59,7 @@ public class JobEntryDao {
         return null;
     }
 
-    public JobEntryRequest createJobEntry(JobEntryRequest jobEntry) throws SQLException {
+    public boolean createJobEntry(JobEntryRequest jobEntry) throws SQLException {
         String insertStatement = "INSERT into JobRole (jobRole, jobSpecification, capability, bandLevel, jobFamily, responsibilities, jobSpecSummary) VALUES (?,?,?,?,?,?,?);";
 
         PreparedStatement st = c.prepareStatement(insertStatement);
@@ -73,7 +73,7 @@ public class JobEntryDao {
         st.setString(7, jobEntry.getJobSpecSummary());
 
         st.executeUpdate();
-        return jobEntry;
+        return true;
     }
 
     public void updateJobEntry(String jobRole, JobEntryRequest jobEntry) throws SQLException{

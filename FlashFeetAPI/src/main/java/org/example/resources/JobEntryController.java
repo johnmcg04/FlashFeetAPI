@@ -8,13 +8,15 @@ import javax.ws.rs.core.Response;
 import org.example.api.JobEntryService;
 import org.example.cli.JobEntryRequest;
 import org.example.client.*;
+import org.example.db.JobEntryDao;
+import org.example.validator.JobEntryValidator;
 
 import java.sql.SQLException;
 
 @Api("FlashFeet Kainos Job Entry API")
 @Path("/api")
 public class JobEntryController {
-    private JobEntryService jobEntryService = new JobEntryService();
+    private JobEntryService jobEntryService = new JobEntryService(new JobEntryDao(), new JobEntryValidator());
 
     public JobEntryController() throws SQLException {
     }

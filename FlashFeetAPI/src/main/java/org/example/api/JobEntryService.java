@@ -12,14 +12,13 @@ import java.util.List;
 
 public class JobEntryService {
 
-    private JobEntryDao jobEntryDao = new JobEntryDao();
-    private JobEntryValidator jobEntryValidator = new JobEntryValidator();
+    private JobEntryDao jobEntryDao;
+    private JobEntryValidator jobEntryValidator;
 
-    public JobEntryService() throws SQLException {
 
-    }
-
-    public JobEntryService(JobEntryDao jobEntryDao, DatabaseConnector databaseConnector) throws SQLException {
+    public JobEntryService(JobEntryDao jobEntryDao, JobEntryValidator jobEntryValidator) {
+        this.jobEntryDao = jobEntryDao;
+        this.jobEntryValidator = jobEntryValidator;
     }
 
     public List<JobEntry> getAllJobEntries() throws FailedToGetJobEntriesException {
@@ -45,7 +44,7 @@ public class JobEntryService {
         }
     }
 
-    public JobEntryRequest createJobEntry(JobEntryRequest jobEntry) throws FailedToCreateJobEntryException, InvalidJobEntryException, SQLException {
+    public boolean createJobEntry(JobEntryRequest jobEntry) throws FailedToCreateJobEntryException, InvalidJobEntryException, SQLException {
         try {
             String validation = jobEntryValidator.isValidJobRole(jobEntry);
 

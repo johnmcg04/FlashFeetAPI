@@ -11,6 +11,7 @@ public class JobEntry {
     private String responsibilities;
     private String jobSpecSummary;
 
+
     public String getJobRole() {
         return jobRole;
     }

@@ -42,5 +42,7 @@ build/
 ### User Added Files ###
 db.properties
 
-../.DS_Store
-../.idea
+/.DS_Store
+.idea
+
+/FlashFeetAPI\ copy/

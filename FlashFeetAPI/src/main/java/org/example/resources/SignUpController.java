@@ -5,6 +5,7 @@ import org.example.api.SignUpService;
 import org.example.cli.Login;
 import org.example.cli.SignUp;
 import org.example.client.FailedToVerifyTokenException;
+import org.example.exception.DatabaseConnectionException;
 import org.example.exception.FailedToLoginException;
 import org.example.exception.FailedTogenerateTokenException;
 
@@ -18,6 +19,9 @@ import java.sql.SQLException;
 @Path("/api")
 public class SignUpController {
     private SignUpService signUpService = new SignUpService();
+
+    public SignUpController() throws DatabaseConnectionException, SQLException {
+    }
 
     @POST
     @Path("/signup")

@@ -4,6 +4,7 @@ import org.example.api.SignUpService;
 import org.example.cli.Login;
 import org.example.db.SignUpDao;
 import org.example.db.DatabaseConnector;
+import org.example.exception.DatabaseConnectionException;
 import org.example.exception.FailedToLoginException;
 import org.example.exception.FailedTogenerateTokenException;
 import org.junit.jupiter.api.DisplayName;
@@ -27,6 +28,9 @@ public class AuthServiceTests {
     SignUpService authService = new SignUpService(authDao, databaseConnector);
 
     private final Connection c = mock(Connection.class);
+
+    public AuthServiceTests() throws DatabaseConnectionException, SQLException {
+    }
 
 //    @Test
 //    @DisplayName("Testing valid login details")

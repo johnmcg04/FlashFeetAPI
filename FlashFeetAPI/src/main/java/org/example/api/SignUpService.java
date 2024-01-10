@@ -4,6 +4,7 @@ package org.example.api;
 import org.example.cli.SignUp;
 import org.example.db.SignUpDao;
 import org.example.db.DatabaseConnector;
+import org.example.exception.DatabaseConnectionException;
 import org.example.exception.FailedToLoginException;
 import org.example.exception.FailedToSignUpException;
 import org.example.exception.FailedTogenerateTokenException;
@@ -21,12 +22,22 @@ import java.util.regex.Pattern;
 public class SignUpService {
     private SignUpDao signUpDao = new SignUpDao();
     private static DatabaseConnector databaseConnector = new DatabaseConnector();
-    static Connection c = databaseConnector.getConnection();
+    static Connection c;
 
-    public SignUpService(){
+    static {
+        try {
+            c = databaseConnector.getConnection();
+        } catch (DatabaseConnectionException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public SignUpService(SignUpDao signUpDao, DatabaseConnector databaseConnector) {
+    public SignUpService() throws DatabaseConnectionException, SQLException {
+    }
+
+    public SignUpService(SignUpDao signUpDao, DatabaseConnector databaseConnector) throws DatabaseConnectionException, SQLException {
     }
 
     public static boolean signUpUser(SignUp signUp) throws FailedToSignUpException, FailedTogenerateTokenException, Exception {

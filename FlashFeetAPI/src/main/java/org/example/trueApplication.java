@@ -5,8 +5,11 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import org.example.exception.DatabaseConnectionException;
 import org.example.resources.SignUpController;
 import org.example.resources.JobRoleController;
+
+import java.sql.SQLException;
 
 public class trueApplication extends Application<trueConfiguration> {
 
@@ -31,9 +34,13 @@ public class trueApplication extends Application<trueConfiguration> {
 
     @Override
     public void run(final trueConfiguration configuration,
-                    final Environment environment) {
+                    final Environment environment) throws SQLException {
         environment.jersey().register(new JobRoleController());
-        environment.jersey().register(new SignUpController());
+        try {
+            environment.jersey().register(new SignUpController());
+        } catch (DatabaseConnectionException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

@@ -9,6 +9,7 @@ import javax.ws.rs.core.Response;
 import org.example.api.JobRoleService;
 import org.example.client.FailedToGetJobsException;
 import org.example.db.DatabaseConnector;
+import org.example.exception.DatabaseConnectionException;
 
 import java.sql.SQLException;
 
@@ -21,7 +22,6 @@ public class JobRoleController {
     @Path("/job-role-list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllJobRoles(){
-        System.out.println("Test");
         try {
             DatabaseConnector databaseConnector = new DatabaseConnector();
             return Response.ok(jobRoleService.getAllJobRoles()).build();
@@ -29,7 +29,7 @@ public class JobRoleController {
             System.err.println(e.getMessage());
 
             return Response.serverError().build();
-        } catch (SQLException e) {
+        } catch (SQLException | DatabaseConnectionException e) {
             throw new RuntimeException(e);
         }
     }

@@ -34,7 +34,7 @@ public class AuthController {
         } catch (FailedToLoginException e) {
             System.err.println(e.getMessage());
 
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+            return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
         }
     }
 

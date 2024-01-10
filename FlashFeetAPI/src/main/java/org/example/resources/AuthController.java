@@ -6,6 +6,7 @@ import org.example.cli.Login;
 import org.example.client.FailedToGetJobsException;
 import org.example.client.FailedToVerifyTokenException;
 import org.example.db.DatabaseConnector;
+import org.example.exception.DatabaseConnectionException;
 import org.example.exception.FailedToLoginException;
 import org.example.exception.FailedTogenerateTokenException;
 
@@ -19,6 +20,9 @@ import java.sql.SQLException;
 @Path("/api")
 public class AuthController {
     private AuthService authService = new AuthService();
+
+    public AuthController() throws DatabaseConnectionException, SQLException {
+    }
 
     @POST
     @Path("/login")

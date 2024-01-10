@@ -1,5 +1,7 @@
 package org.example.db;
 
+import org.example.exception.DatabaseConnectionException;
+
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,33 +11,34 @@ import java.util.Properties;
 public class DatabaseConnector {
     private static Connection conn;
 
-    public Connection getConnection() {
-        String user, password, host, name;
+    public Connection getConnection() throws DatabaseConnectionException, SQLException {
+        String user;
+        String password;
+        String host;
+        String database;
 
-        if (conn != null) {return conn;}
+        if (conn != null && !conn.isClosed()) {
+            return conn;
+        }
 
-        try (FileInputStream propsStream = new FileInputStream("db.properties")){
-
-            Properties props = new Properties();
-            props.load(propsStream);
-
-            user = props.getProperty("user");
-            password = props.getProperty("password");
-            host = props.getProperty("host");
-            name = props.getProperty("name");
+        try {
+            user            = System.getenv("DB_USERNAME");
+            password        = System.getenv("DB_PASSWORD");
+            host            = System.getenv("DB_HOST");
+            database        = System.getenv("DB_NAME");
 
             if (user == null || password == null || host == null)
-                throw new IllegalArgumentException("Properties file must exist " +
-                        "and must contain user, password, name and host properties.");
+                throw new IllegalArgumentException(
+                        "Environment variables not set.");
 
-            conn = DriverManager.getConnection("jdbc:mysql://" + host + "/" + name + "?useSSL=false", user, password);
+            conn = DriverManager.getConnection("jdbc:mysql://"
+                    + host + "/" + database + "?allowPublicKeyRetrieval=true&useSSL=false", user, password);
+
             return conn;
-
-        }catch(Exception e){
-            System.err.println(e.getMessage());
-        } finally {
-            System.out.println("I will always run!");
+        } catch (Exception e) {
+            throw new DatabaseConnectionException(e);
         }
-        return null;
     }
 }
+
+

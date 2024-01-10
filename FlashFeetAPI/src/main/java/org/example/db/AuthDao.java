@@ -2,6 +2,7 @@ package org.example.db;
 
 import org.apache.commons.lang3.time.DateUtils;
 import org.example.cli.Login;
+import org.example.exception.DatabaseConnectionException;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -15,6 +16,9 @@ import java.util.Date;
 public class AuthDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
     Connection connection = databaseConnector.getConnection();
+
+    public AuthDao() throws DatabaseConnectionException, SQLException {
+    }
 
     public boolean validLogin(Login login, Connection c){
         try{

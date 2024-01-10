@@ -50,7 +50,7 @@ public class JobRoleController {
         } catch (JobRoleDoesNotExistException e) {
             System.err.println(e.getMessage());
 
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         } catch (FailedToDeleteJobRoleException e) {
             System.err.println(e.getMessage());
 

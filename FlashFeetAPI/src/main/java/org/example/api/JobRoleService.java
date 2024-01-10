@@ -32,13 +32,12 @@ public class JobRoleService {
     public int deleteJobRole(String jobRole) throws JobRoleDoesNotExistException, FailedToDeleteJobRoleException {
         try {
             JobRole deleteJobRole = jobRoleDao.getJobRole(jobRole);
-            if (deleteJobRole != null) {
-                jobRoleDao.deleteJobRole(jobRole);
-
-                return 1;
+            if (deleteJobRole == null) {
+                return -1;
             }
             else {
-                return -1;
+                jobRoleDao.deleteJobRole(jobRole);
+                return 1;
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

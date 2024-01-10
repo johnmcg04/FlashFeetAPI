@@ -5,7 +5,6 @@ import io.swagger.annotations.Api;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
 
 import org.example.api.JobRoleService;
 import org.example.client.FailedToDeleteJobRoleException;
@@ -28,7 +27,6 @@ public class JobRoleController {
     @Path("/job-role-list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllJobRoles(){
-        System.out.println("Test");
         try {
             return Response.ok(jobRoleService.getAllJobRoles()).build();
         } catch (FailedToGetJobsException | SQLException e){

@@ -7,7 +7,6 @@ import org.example.client.JobRoleDoesNotExistException;
 import org.example.db.DatabaseConnector;
 import org.example.db.JobRoleDao;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 

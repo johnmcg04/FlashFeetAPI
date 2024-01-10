@@ -46,7 +46,7 @@ public class AuthController {
             Boolean isAdmin = authService.isTokenAdmin(token);
             return Response.ok(isAdmin).build();
         } catch (SQLException | FailedToVerifyTokenException e) {
-            throw new RuntimeException(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
         }
     }
 

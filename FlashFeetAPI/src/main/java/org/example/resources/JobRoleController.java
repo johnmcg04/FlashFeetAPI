@@ -45,7 +45,7 @@ public class JobRoleController {
     public Response deleteJobRole(@PathParam("jobRole") String jobRole) {
         System.out.println(jobRole);
         try {
-            jobRoleService.deleteJobRole(jobRole, databaseConnector);
+            jobRoleService.deleteJobRole(jobRole);
 
             return Response.ok().build();
         } catch (JobRoleDoesNotExistException e) {

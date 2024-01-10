@@ -49,7 +49,7 @@ public class JobRoleServiceTests {
         }
 
         @Test
-        void deleteJobRole_shouldReturn1_whenDaoDeletesJobRole() throws SQLException, DatabaseConnectionException, JobRoleDoesNotExistException, FailedToGetJobsException, org.example.client.JobRoleDoesNotExistException, FailedToDeleteJobRoleException {
+        void deleteJobRole_shouldReturn1_whenDaoDeletesJobRole() throws SQLException, JobRoleDoesNotExistException, FailedToGetJobsException, org.example.client.JobRoleDoesNotExistException, FailedToDeleteJobRoleException {
 
                 String jobRoleString = new String(
                         String.valueOf(mock(JobRole.class))
@@ -58,7 +58,7 @@ public class JobRoleServiceTests {
 
                 Mockito.when(databaseConnector.getConnection()).thenReturn(c);
                 Mockito.when(jobRoleDao.deleteJobRole(jobRoleString)).thenReturn(1);
-                assertEquals(1, jobRoleService.deleteJobRole(jobRoleString, databaseConnector));
+                assertEquals(1, jobRoleService.deleteJobRole(jobRoleString));
         }
 }
 

@@ -30,7 +30,7 @@ public class JobRoleService {
         return jobRoleDao.getAllJobRoles(databaseConnector.getConnection());
     }
 
-    public int deleteJobRole(String jobRole, DatabaseConnector databaseConnector) throws JobRoleDoesNotExistException, FailedToDeleteJobRoleException {
+    public int deleteJobRole(String jobRole) throws JobRoleDoesNotExistException, FailedToDeleteJobRoleException {
         try {
             JobRole deleteJobRole = jobRoleDao.getJobRole(jobRole);
 

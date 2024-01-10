@@ -28,7 +28,6 @@ public class JobRoleController {
     @Path("/job-role-list")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllJobRoles(){
-        System.out.println("Test");
         try {
             return Response.ok(jobRoleService.getAllJobRoles()).build();
         } catch (FailedToGetJobsException e){

@@ -5,7 +5,6 @@ import io.swagger.annotations.Api;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
 
 import org.example.api.JobRoleService;
 import org.example.client.FailedToDeleteJobRoleException;

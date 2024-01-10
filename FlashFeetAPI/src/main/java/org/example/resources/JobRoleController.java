@@ -30,12 +30,10 @@ public class JobRoleController {
     public Response getAllJobRoles(){
         try {
             return Response.ok(jobRoleService.getAllJobRoles()).build();
-        } catch (FailedToGetJobsException e){
+        } catch (FailedToGetJobsException | SQLException e){
             System.err.println(e.getMessage());
 
             return Response.serverError().build();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
     @DELETE

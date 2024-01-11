@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import org.example.exception.DatabaseConnectionException;
 import org.example.resources.SignUpController;
 import org.example.resources.AuthController;
-import org.example.resources.JobRoleController;
 
 
 

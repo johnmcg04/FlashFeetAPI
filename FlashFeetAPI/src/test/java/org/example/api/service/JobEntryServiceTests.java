@@ -6,20 +6,15 @@ import org.example.cli.JobEntryRequest;
 import org.example.client.FailedToCreateJobEntryException;
 import org.example.client.FailedToGetJobEntriesException;
 import org.example.client.InvalidJobEntryException;
-import org.example.client.JobEntryDoesNotExistException;
-import org.example.db.DatabaseConnector;
 import org.example.db.JobEntryDao;
 import org.example.validator.JobEntryValidator;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import javax.xml.crypto.Data;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -28,7 +23,7 @@ public class JobEntryServiceTests {
     JobEntryDao jobRoleDao = mock(JobEntryDao.class);
     JobEntryValidator jobEntryValidator = mock(JobEntryValidator.class);
 
-    JobEntryService jobRoleService = new JobEntryService(jobRoleDao, jobEntryValidator);
+    JobEntryService jobRoleService = new JobEntryService( jobRoleDao, jobEntryValidator);
 
     Connection c;
 
@@ -45,6 +40,9 @@ public class JobEntryServiceTests {
         Mockito.when(jobRoleDao.getAllJobEntries()).thenReturn(listOfJobRoles);
         assertEquals(listOfJobRoles, jobRoleService.getAllJobEntries());
     }
+
+
+
 
     @Test
     void createJobRole_shouldReturnTrue_whenDaoReturnsTrue() throws SQLException, FailedToCreateJobEntryException, InvalidJobEntryException {

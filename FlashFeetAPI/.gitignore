@@ -43,5 +43,6 @@ build/
 /db.properties
 
 */db.properties
-
 db.properties
+
+dependency-reduced-pom.xml

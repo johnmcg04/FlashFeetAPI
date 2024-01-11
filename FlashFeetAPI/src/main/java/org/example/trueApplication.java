@@ -5,9 +5,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import org.example.resources.BandLevelController;
-import org.example.resources.CapabilityController;
-import org.example.resources.JobEntryController;
+import org.example.resources.*;
 
 import java.sql.SQLException;
 
@@ -34,10 +32,13 @@ public class trueApplication extends Application<trueConfiguration> {
 
     @Override
     public void run(final trueConfiguration configuration,
-                    final Environment environment) {
-            environment.jersey().register(new JobEntryController());
-            environment.jersey().register(new CapabilityController());
-            environment.jersey().register(new BandLevelController());
+                    final Environment environment) throws SQLException {
+        environment.jersey().register(new JobEntryController());
+        environment.jersey().register(new CapabilityController());
+        environment.jersey().register(new BandLevelController());
+        environment.jersey().register(new SignUpController());
+        environment.jersey().register(new AuthController());
+
 
     }
 

@@ -3,6 +3,7 @@ package org.example.resources;
 import io.swagger.annotations.Api;
 import org.example.api.SignUpService;
 import org.example.cli.SignUp;
+import org.example.client.FailedToGetJobEntriesException;
 import org.example.exception.FailedTogenerateTokenException;
 
 
@@ -14,10 +15,6 @@ import java.sql.SQLException;
 @Api("DropWizard Auth API")
 @Path("/api")
 public class SignUpController {
-    private SignUpService signUpService = new SignUpService();
-
-    public SignUpController() throws SQLException {
-    }
 
     @POST
     @Path("/signup")

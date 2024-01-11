@@ -11,6 +11,7 @@ import org.example.client.FailedToGetJobsException;
 import org.example.db.DatabaseConnector;
 import org.example.exception.DatabaseConnectionException;
 
+
 import java.sql.SQLException;
 
 @Api("FlashFeet Kainos Job Data API")
@@ -34,6 +35,7 @@ public class JobRoleController {
             throw new RuntimeException(e);
         } catch (DatabaseConnectionException e) {
             throw new RuntimeException(e);
+
         }
     }
 }

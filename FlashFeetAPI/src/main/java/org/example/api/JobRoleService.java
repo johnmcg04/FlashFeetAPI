@@ -26,5 +26,4 @@ public class JobRoleService {
 
     public List<JobRole> getAllJobRoles() throws FailedToGetJobsException, SQLException {
         return jobRoleDao.getAllJobRoles(databaseConnector.getConnection());
-    }
 }

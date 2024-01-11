@@ -2,6 +2,7 @@ package org.example.db;
 
 import org.example.cli.Capability;
 import org.example.cli.JobEntry;
+import org.example.exception.DatabaseConnectionException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class CapabilityDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
-    public List<Capability> getAllCapabilities() throws SQLException {
+    public List<Capability> getAllCapabilities() throws SQLException, DatabaseConnectionException {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 

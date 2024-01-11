@@ -7,6 +7,7 @@ import org.example.client.FailedToCreateJobEntryException;
 import org.example.client.FailedToGetJobEntriesException;
 import org.example.client.InvalidJobEntryException;
 import org.example.db.JobEntryDao;
+import org.example.exception.DatabaseConnectionException;
 import org.example.validator.JobEntryValidator;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -31,7 +32,7 @@ public class JobEntryServiceTests {
     }
 
     @Test
-    void getAllJobRoles_shouldReturnAllJobRoles_whenDaoReturnsAllJobRoles() throws SQLException, FailedToGetJobEntriesException {
+    void getAllJobRoles_shouldReturnAllJobRoles_whenDaoReturnsAllJobRoles() throws SQLException, FailedToGetJobEntriesException, DatabaseConnectionException {
 
         List<JobEntry> listOfJobRoles = Collections.singletonList(
                 mock(JobEntry.class)

@@ -3,6 +3,7 @@ package org.example.api;
 import org.example.cli.BandLevel;
 import org.example.client.FailedToGetBandLevelsException;
 import org.example.db.BandLevelDao;
+import org.example.exception.DatabaseConnectionException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -16,6 +17,8 @@ public class BandLevelService {
             return bandLevelList;
         } catch (SQLException e) {
             throw new FailedToGetBandLevelsException();
+        } catch (DatabaseConnectionException e) {
+            throw new RuntimeException(e);
         }
     }
 }

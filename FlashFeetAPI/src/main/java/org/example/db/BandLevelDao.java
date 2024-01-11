@@ -1,6 +1,7 @@
 package org.example.db;
 
 import org.example.cli.BandLevel;
+import org.example.exception.DatabaseConnectionException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class BandLevelDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
-    public List<BandLevel> getAllBandLevels() throws SQLException {
+    public List<BandLevel> getAllBandLevels() throws SQLException, DatabaseConnectionException {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 

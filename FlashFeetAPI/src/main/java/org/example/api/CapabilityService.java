@@ -5,6 +5,7 @@ import org.example.cli.JobEntry;
 import org.example.client.FailedToGetCapabilitiesException;
 import org.example.client.FailedToGetJobEntriesException;
 import org.example.db.CapabilityDao;
+import org.example.exception.DatabaseConnectionException;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -19,6 +20,8 @@ public class CapabilityService {
             return capabilityList;
         } catch (SQLException e) {
             throw new FailedToGetCapabilitiesException();
+        } catch (DatabaseConnectionException e) {
+            throw new RuntimeException(e);
         }
     }
 }

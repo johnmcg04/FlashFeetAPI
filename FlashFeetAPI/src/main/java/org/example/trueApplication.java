@@ -6,11 +6,8 @@ import io.dropwizard.setup.Environment;
 import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import org.example.exception.DatabaseConnectionException;
-<<<<<<< HEAD
 import org.example.resources.SignUpController;
-=======
 import org.example.resources.AuthController;
->>>>>>> Pre-Production
 import org.example.resources.JobRoleController;
 
 import java.sql.SQLException;

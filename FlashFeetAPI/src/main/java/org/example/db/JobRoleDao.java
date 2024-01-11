@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JobRoleDao {
-
-
     private DatabaseConnector databaseConnector = new DatabaseConnector();
-    public List<JobRole> getAllJobRoles() throws SQLException {
-        Connection c = databaseConnector.getConnection();
-        Statement st = c.createStatement();
+    public List<JobRole> getAllJobRoles(Connection connection) throws SQLException {
 
-        ResultSet rs = st.executeQuery("SELECT jobRole FROM JobRole;");
+        // Connection c = databaseConnector.getConnection();
+
+        Statement st = connection.createStatement();
+
+        ResultSet rs = st.executeQuery("SELECT jobRole FROM JobRole ORDER BY jobRole ASC;");
 
         List<JobRole> jobRoleList= new ArrayList<>();
 

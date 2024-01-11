@@ -36,9 +36,6 @@ public class DatabaseConnector {
 
             conn = DriverManager.getConnection("jdbc:mysql://"
                     + host + "/" + database + "?allowPublicKeyRetrieval=true&useSSL=false", user, password);
-
-            conn = DriverManager.getConnection("jdbc:mysql://" + host + "/" + name + "?useSSL=false", user, password);
-            //conn = DriverManager.getConnection("jdbc:mysql://100.127.29.164/FlashFeet_JohnMc useSSL=false, John_Mc, John123");
             return conn;
 
         } catch (Exception e) {

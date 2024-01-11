@@ -40,4 +40,10 @@ FlashFeetAPI/.vscode/
 .DS_Store
 
 ### User Added Files ###
+<<<<<<< HEAD:.gitignore
 FlashFeetAPI/db.properties
+=======
+db.properties
+
+dependency-reduced-pom.xml
+>>>>>>> Pre-Production:FlashFeetAPI/.gitignore

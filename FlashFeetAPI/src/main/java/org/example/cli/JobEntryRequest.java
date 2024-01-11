@@ -75,5 +75,16 @@ public class JobEntryRequest {
         this.jobSpecSummary = jobSpecSummary;
     }
 
+    @Override
+    public String toString() {
+        return "Job Role: " + this.jobRole +
+                ", Job Specification: " + this.jobSpecification +
+                ", Capability: " + this.capability +
+                ", Band Level: " + this.bandLevel +
+                ", Job Family: " + this.jobFamily +
+                ", Responsibilities: " + this.responsibilities +
+                ", Job Specificaton Summary: " + this.jobSpecSummary;
+    }
+
 
 }

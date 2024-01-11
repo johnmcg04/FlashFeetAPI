@@ -51,8 +51,9 @@ public class JobEntryController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateJobEntry(@PathParam("jobRole") String jobRole, JobEntryRequest jobEntry){
         try {
+            System.out.println(jobEntry.toString());
             jobEntryService.updateJobEntry(jobRole, jobEntry);
-            return Response.ok().build();
+            return Response.ok(jobRole).build();
         } catch (InvalidJobEntryException | JobEntryDoesNotExistException e) {
             System.err.println(e.getMessage());
 

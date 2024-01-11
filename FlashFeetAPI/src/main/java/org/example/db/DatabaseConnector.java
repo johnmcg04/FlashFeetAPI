@@ -1,9 +1,10 @@
 package org.example.db;
 
+import org.example.exception.DatabaseConnectionException;
+
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class DatabaseConnector {
@@ -12,10 +13,11 @@ public class DatabaseConnector {
     public Connection getConnection() {
         String user, password, host, name;
 
-        if (conn != null) {return conn;}
+        if (conn != null) {
+            return conn;
+        }
 
-        try (FileInputStream propsStream = new FileInputStream("db.properties")){
-
+        try (FileInputStream propsStream = new FileInputStream("db.properties")) {
             Properties props = new Properties();
             props.load(propsStream);
 
@@ -31,7 +33,7 @@ public class DatabaseConnector {
             conn = DriverManager.getConnection("jdbc:mysql://" + host + "/" + name + "?useSSL=false", user, password);
             return conn;
 
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         } finally {
             System.out.println("I will always run!");

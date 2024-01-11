@@ -4,6 +4,7 @@ import org.example.cli.JobRole;
 import org.example.client.FailedToGetJobsException;
 import org.example.db.DatabaseConnector;
 import org.example.db.JobRoleDao;
+import org.example.exception.DatabaseConnectionException;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -24,6 +25,7 @@ public class JobRoleService {
         this.databaseConnector = databaseConnector;
     }
 
-    public List<JobRole> getAllJobRoles() throws FailedToGetJobsException, SQLException {
+    public List<JobRole> getAllJobRoles() throws FailedToGetJobsException, SQLException, DatabaseConnectionException {
         return jobRoleDao.getAllJobRoles(databaseConnector.getConnection());
+    }
 }

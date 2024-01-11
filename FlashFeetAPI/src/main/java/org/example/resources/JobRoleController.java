@@ -9,6 +9,8 @@ import javax.ws.rs.core.Response;
 import org.example.api.JobRoleService;
 import org.example.client.FailedToGetJobsException;
 import org.example.db.DatabaseConnector;
+import org.example.exception.DatabaseConnectionException;
+
 
 import java.sql.SQLException;
 
@@ -31,6 +33,9 @@ public class JobRoleController {
             return Response.serverError().build();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (DatabaseConnectionException e) {
+            throw new RuntimeException(e);
+
         }
     }
 }

@@ -41,7 +41,6 @@ public class JobRoleServiceTests {
                         mock(JobRole.class)
                 );
 
-
                 Mockito.when(databaseConnector.getConnection()).thenReturn(c);
                 Mockito.when(jobRoleDao.getAllJobRoles(c)).thenReturn(listOfJobRoles);
                 assertEquals(listOfJobRoles, jobRoleService.getAllJobRoles());

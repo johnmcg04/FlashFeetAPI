@@ -11,6 +11,7 @@ import org.example.resources.CapabilityController;
 import org.example.resources.JobEntryController;
 =======
 import org.example.exception.DatabaseConnectionException;
+import org.example.resources.SignUpController;
 import org.example.resources.AuthController;
 import org.example.resources.JobRoleController;
 >>>>>>> Pre-Production
@@ -44,6 +45,7 @@ public class trueApplication extends Application<trueConfiguration> {
             environment.jersey().register(new JobEntryController());
             environment.jersey().register(new CapabilityController());
             environment.jersey().register(new BandLevelController());
+
     }
 
 }

@@ -11,8 +11,11 @@ import java.util.Properties;
 public class DatabaseConnector {
     private static Connection conn;
 
-    public Connection getConnection() {
-        String user, password, host, name;
+    public Connection getConnection() throws DatabaseConnectionException {
+        String user;
+        String password;
+        String host;
+        String database;
 
         if (conn != null) {
             return conn;
@@ -25,11 +28,14 @@ public class DatabaseConnector {
             user = props.getProperty("user");
             password = props.getProperty("password");
             host = props.getProperty("host");
-            name = props.getProperty("name");
+            database = props.getProperty("name");
 
             if (user == null || password == null || host == null)
-                throw new IllegalArgumentException("Properties file must exist " +
-                        "and must contain user, password, name and host properties.");
+                throw new IllegalArgumentException(
+                        "Environment variables not set.");
+
+            conn = DriverManager.getConnection("jdbc:mysql://"
+                    + host + "/" + database + "?allowPublicKeyRetrieval=true&useSSL=false", user, password);
 
             conn = DriverManager.getConnection("jdbc:mysql://" + host + "/" + name + "?useSSL=false", user, password);
             //conn = DriverManager.getConnection("jdbc:mysql://100.127.29.164/FlashFeet_JohnMc useSSL=false, John_Mc, John123");

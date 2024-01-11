@@ -1,25 +1,18 @@
 package org.example.api.integration;
 
-import org.example.api.AuthService;
 import org.example.cli.Login;
-import org.example.db.AuthDao;
-import org.example.db.DatabaseConnector;
-import org.example.exception.FailedToLoginException;
-import org.example.exception.FailedTogenerateTokenException;
 import org.example.trueApplication;
 import org.junit.jupiter.api.DisplayName;
 import org.example.trueConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.example.cli.Login;
 import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 import io.dropwizard.testing.junit5.DropwizardAppExtension;
 import io.dropwizard.testing.junit5.DropwizardExtensionsSupport;
-import org.junit.jupiter.api.Assertions;
+
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -20,9 +20,8 @@ import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class JobEntryServiceTests {
 
@@ -60,6 +59,22 @@ public class JobEntryServiceTests {
                 "Job Spec Summary");
 
         Mockito.when(jobRoleDao.createJobEntry(jobEntry)).thenReturn(true);
-        assertEquals(true, jobRoleService.createJobEntry(jobEntry));
+        assertTrue( jobRoleService.createJobEntry(jobEntry));
+    }
+
+    @Test
+    void createJobRole_shouldReturnFalse_whenInvalidJobEntry() throws SQLException, FailedToCreateJobEntryException, InvalidJobEntryException {
+
+        JobEntryRequest jobEntry = new JobEntryRequest(
+                "123456789012345678901234567890123456789012345678901234567890",
+                "Job Spec Link",
+                "Capability",
+                "Band Level",
+                "Job Family",
+                "Responsibilities",
+                "Job Spec Summary");
+
+        Mockito.when(jobRoleDao.createJobEntry(jobEntry)).thenReturn(false);
+        assertFalse(jobRoleService.createJobEntry(jobEntry));
     }
 }

@@ -3,7 +3,7 @@ USE FlashFeet_JohnMc;
 
 DELIMITER $$
 DROP PROCEDURE IF EXISTS CreateJobRoleTable $$
-CREATE PROCEDURE CreateDatabase()
+CREATE PROCEDURE CreateJobRoleTable()
 BEGIN
   
 CREATE TABLE IF NOT EXISTS JobRole(
@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS JobRole(
 
 END $$
 DELIMITER ;
-CALL CreateDatabase();
+CALL CreateJobRoleTable();

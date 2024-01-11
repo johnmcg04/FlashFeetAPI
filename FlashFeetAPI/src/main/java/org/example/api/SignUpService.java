@@ -26,6 +26,7 @@ public class SignUpService {
         c = databaseConnector.getConnection();
     }
 
+
     public SignUpService() throws SQLException {
     }
 

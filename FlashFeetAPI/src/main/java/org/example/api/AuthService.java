@@ -5,7 +5,6 @@ import org.example.cli.Login;
 import org.example.client.FailedToVerifyTokenException;
 import org.example.db.AuthDao;
 import org.example.db.DatabaseConnector;
-import org.example.exception.DatabaseConnectionException;
 import org.example.exception.FailedToLoginException;
 import org.example.exception.FailedTogenerateTokenException;
 
@@ -17,11 +16,11 @@ public class AuthService {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
     Connection c = databaseConnector.getConnection();
 
-    public AuthService() throws DatabaseConnectionException, SQLException {
+    public AuthService() throws SQLException {
 
     }
 
-    public AuthService(AuthDao authDao, DatabaseConnector databaseConnector) throws DatabaseConnectionException, SQLException {
+    public AuthService(AuthDao authDao, DatabaseConnector databaseConnector) throws SQLException {
 
     }
 

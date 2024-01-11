@@ -2,11 +2,7 @@ package org.example.resources;
 
 import io.swagger.annotations.Api;
 import org.example.api.SignUpService;
-import org.example.cli.Login;
 import org.example.cli.SignUp;
-import org.example.client.FailedToVerifyTokenException;
-import org.example.exception.DatabaseConnectionException;
-import org.example.exception.FailedToLoginException;
 import org.example.exception.FailedTogenerateTokenException;
 
 
@@ -20,7 +16,7 @@ import java.sql.SQLException;
 public class SignUpController {
     private SignUpService signUpService = new SignUpService();
 
-    public SignUpController() throws DatabaseConnectionException, SQLException {
+    public SignUpController() throws SQLException {
     }
 
     @POST

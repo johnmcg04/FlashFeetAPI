@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BandLevelDao {
     private DatabaseConnector databaseConnector = new DatabaseConnector();
-    public List<BandLevel> getAllBandLevels() throws SQLException {
+    public List<BandLevel> getAllBandLevels() throws SQLException{
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 

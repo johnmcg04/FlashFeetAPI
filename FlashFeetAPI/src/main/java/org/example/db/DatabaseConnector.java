@@ -1,9 +1,6 @@
 package org.example.db;
 
-import org.example.exception.DatabaseConnectionException;
-
 import java.io.FileInputStream;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
@@ -11,7 +8,7 @@ import java.util.Properties;
 public class DatabaseConnector {
     private static Connection conn;
 
-    public Connection getConnection() throws DatabaseConnectionException {
+    public Connection getConnection(){
         String user;
         String password;
         String host;

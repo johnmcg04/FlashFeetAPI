@@ -30,9 +30,9 @@ public class DatabaseConnector {
             host = props.getProperty("host");
             database = props.getProperty("name");
 
-            if (user == null || password == null || host == null)
-                throw new IllegalArgumentException(
-                        "Environment variables not set.");
+//            if (user == null || password == null || host == null)
+//                throw new IllegalArgumentException(
+//                        "Environment variables not set.");
 
             conn = DriverManager.getConnection("jdbc:mysql://"
                     + host + "/" + database + "?allowPublicKeyRetrieval=true&useSSL=false", user, password);

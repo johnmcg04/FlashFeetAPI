@@ -9,6 +9,7 @@ import org.example.api.JobEntryService;
 import org.example.cli.JobEntryRequest;
 import org.example.client.*;
 import org.example.db.JobEntryDao;
+import org.example.exception.DatabaseConnectionException;
 import org.example.validator.JobEntryValidator;
 
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ import java.sql.SQLException;
 public class JobEntryController {
     private JobEntryService jobEntryService = new JobEntryService(new JobEntryDao(), new JobEntryValidator());
 
-    public JobEntryController() throws SQLException {
+    public JobEntryController() throws SQLException, DatabaseConnectionException {
     }
 
     @GET

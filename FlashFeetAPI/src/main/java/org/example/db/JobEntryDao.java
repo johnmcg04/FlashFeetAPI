@@ -2,6 +2,7 @@ package org.example.db;
 
 import org.example.cli.JobEntry;
 import org.example.cli.JobEntryRequest;
+import org.example.exception.DatabaseConnectionException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,10 +14,10 @@ public class JobEntryDao {
 
     Connection c = databaseConnector.getConnection();
 
-    public JobEntryDao() throws SQLException {
+    public JobEntryDao() throws SQLException, DatabaseConnectionException {
     }
 
-    public List<JobEntry> getAllJobEntries() throws SQLException {
+    public List<JobEntry> getAllJobEntries() throws SQLException, DatabaseConnectionException {
         Connection c = databaseConnector.getConnection();
         Statement st = c.createStatement();
 

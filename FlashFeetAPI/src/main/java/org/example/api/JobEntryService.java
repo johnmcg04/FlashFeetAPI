@@ -5,6 +5,7 @@ import org.example.cli.JobEntryRequest;
 import org.example.client.*;
 import org.example.db.DatabaseConnector;
 import org.example.db.JobEntryDao;
+import org.example.exception.DatabaseConnectionException;
 import org.example.validator.JobEntryValidator;
 
 import java.sql.SQLException;
@@ -29,6 +30,8 @@ public class JobEntryService {
             return jobEntryList;
         } catch (SQLException e) {
             throw new FailedToGetJobEntriesException();
+        } catch (DatabaseConnectionException e) {
+            throw new RuntimeException(e);
         }
     }
 

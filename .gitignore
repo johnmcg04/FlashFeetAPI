@@ -1,15 +1,15 @@
-target/
+FlashFeetAPI/target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
-.idea/*
-.idea/workspace.xml
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+FlashFeetAPI/.idea/*
+FlashFeetAPI/.idea/workspace.xml
+FlashFeetAPI/.idea/modules.xml
+FlashFeetAPI/.idea/jarRepositories.xml
+FlashFeetAPI/.idea/compiler.xml
+FlashFeetAPI/.idea/libraries/
 *.iws
 *.iml
 *.ipr
@@ -34,12 +34,16 @@ build/
 !**/src/test/**/build/
 
 ### VS Code ###
-.vscode/
+FlashFeetAPI/.vscode/
 
 ### Mac OS ###
 .DS_Store
 
 ### User Added Files ###
+<<<<<<< HEAD:.gitignore
+FlashFeetAPI/db.properties
+=======
 db.properties
 
 dependency-reduced-pom.xml
+>>>>>>> Pre-Production:FlashFeetAPI/.gitignore

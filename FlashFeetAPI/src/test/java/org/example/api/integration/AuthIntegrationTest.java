@@ -64,7 +64,7 @@ public class AuthIntegrationTest {
                 .request()
                 .post(Entity.entity(invalidLogin, MediaType.APPLICATION_JSON_TYPE));
 
-        assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus()); //500 code returned
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus()); //500 code returned
     }
 
     @Test
@@ -76,7 +76,7 @@ public class AuthIntegrationTest {
                 .request()
                 .post(Entity.entity(invalidLogin, MediaType.APPLICATION_JSON_TYPE));
 
-        assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus()); //500 code returned
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus()); //500 code returned
     }
 
     @Test
@@ -88,7 +88,7 @@ public class AuthIntegrationTest {
                 .request()
                 .post(Entity.entity(invalidLogin, MediaType.APPLICATION_JSON_TYPE));
 
-        assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus()); //500 code returned
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus()); //500 code returned
     }
 
     @Test
@@ -100,7 +100,7 @@ public class AuthIntegrationTest {
                 .request()
                 .post(Entity.entity(invalidLogin, MediaType.APPLICATION_JSON_TYPE));
 
-        assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus()); //500 code returned
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus()); //500 code returned
     }
 
     @Test
@@ -112,7 +112,7 @@ public class AuthIntegrationTest {
                 .request()
                 .post(Entity.entity(invalidLogin, MediaType.APPLICATION_JSON_TYPE));
 
-        assertEquals(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), response.getStatus()); //500 code returned
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), response.getStatus()); //500 code returned
     }
 
 

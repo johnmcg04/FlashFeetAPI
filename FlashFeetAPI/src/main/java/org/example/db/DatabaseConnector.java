@@ -1,7 +1,5 @@
 package org.example.db;
 
-import org.example.exception.DatabaseConnectionException;
-
 import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +8,7 @@ import java.util.Properties;
 public class DatabaseConnector {
     private static Connection conn;
 
-    public Connection getConnection() throws DatabaseConnectionException {
+    public Connection getConnection(){
         String user;
         String password;
         String host;
@@ -29,13 +27,12 @@ public class DatabaseConnector {
             host = props.getProperty("host");
             database = props.getProperty("name");
 
-            if (user == null || password == null || host == null)
-                throw new IllegalArgumentException(
-                        "Environment variables not set.");
+//            if (user == null || password == null || host == null)
+//                throw new IllegalArgumentException(
+//                        "Environment variables not set.");
 
             conn = DriverManager.getConnection("jdbc:mysql://"
                     + host + "/" + database + "?allowPublicKeyRetrieval=true&useSSL=false", user, password);
-
             return conn;
 
         } catch (Exception e) {

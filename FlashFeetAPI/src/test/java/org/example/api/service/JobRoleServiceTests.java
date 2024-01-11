@@ -1,11 +1,10 @@
 package org.example.api.service;
 
-import org.example.api.JobRoleService;
-import org.example.cli.JobRole;
-import org.example.client.FailedToGetJobsException;
+import org.example.api.JobEntryService;
+import org.example.cli.JobEntry;
+import org.example.client.FailedToGetJobEntriesException;
 import org.example.db.DatabaseConnector;
-import org.example.db.JobRoleDao;
-import org.example.exception.DatabaseConnectionException;
+import org.example.db.JobEntryDao;
 import org.example.exception.JobRoleDoesNotExistException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,36 +13,33 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class JobRoleServiceTests {
 
-        JobRoleDao jobRoleDao = mock(JobRoleDao.class);
+        JobEntryDao jobRoleDao = mock(JobEntryDao.class);
         DatabaseConnector databaseConnector = mock(DatabaseConnector.class);
 
-        JobRoleService jobRoleService = new JobRoleService( jobRoleDao, databaseConnector);
+        JobEntryService jobRoleService = new JobEntryService( jobRoleDao, databaseConnector);
 
         Connection c;
 
         @Test
-        void getAllJobRoles_shouldReturnAllJobRoles_whenDaoReturnsAllJobRoles() throws SQLException, DatabaseConnectionException, JobRoleDoesNotExistException, FailedToGetJobsException {
+        void getAllJobRoles_shouldReturnAllJobRoles_whenDaoReturnsAllJobRoles() throws FailedToGetJobEntriesException, SQLException {
 
-                List<JobRole> listOfJobRoles = Collections.singletonList(
-                        mock(JobRole.class)
+                List<JobEntry> listOfJobRoles = Collections.singletonList(
+                        mock(JobEntry.class)
                 );
 
                 Mockito.when(databaseConnector.getConnection()).thenReturn(c);
-                Mockito.when(jobRoleDao.getAllJobRoles(c)).thenReturn(listOfJobRoles);
-                assertEquals(listOfJobRoles, jobRoleService.getAllJobRoles());
+                Mockito.when(jobRoleDao.getAllJobEntries()).thenReturn(listOfJobRoles);
+                assertEquals(listOfJobRoles, jobRoleService.getAllJobEntries());
         }
 }
 

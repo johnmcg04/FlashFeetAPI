@@ -40,6 +40,9 @@ build/
 .DS_Store
 
 ### User Added Files ###
+/db.properties
+
+*/db.properties
 db.properties
 
 dependency-reduced-pom.xml

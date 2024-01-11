@@ -4,8 +4,6 @@ package org.example.api;
 import org.example.cli.SignUp;
 import org.example.db.SignUpDao;
 import org.example.db.DatabaseConnector;
-import org.example.exception.DatabaseConnectionException;
-import org.example.exception.FailedToLoginException;
 import org.example.exception.FailedToSignUpException;
 import org.example.exception.FailedTogenerateTokenException;
 import java.nio.charset.StandardCharsets;
@@ -25,17 +23,14 @@ public class SignUpService {
     static Connection c;
 
     static {
-        try {
-            c = databaseConnector.getConnection();
-        } catch (DatabaseConnectionException e) {
-            throw new RuntimeException(e);
-        }
+        c = databaseConnector.getConnection();
     }
 
-    public SignUpService() throws DatabaseConnectionException, SQLException {
+
+    public SignUpService() throws SQLException {
     }
 
-    public SignUpService(SignUpDao signUpDao, DatabaseConnector databaseConnector) throws DatabaseConnectionException, SQLException {
+    public SignUpService(SignUpDao signUpDao, DatabaseConnector databaseConnector) throws SQLException {
     }
 
     public static boolean signUpUser(SignUp signUp) throws FailedToSignUpException, FailedTogenerateTokenException, Exception {

@@ -1,21 +1,28 @@
 package org.example.api.validator;
 
-import org.example.cli.JobRole;
-import org.example.validator.JobRoleValidator;
+import org.example.cli.JobEntry;
+import org.example.cli.JobEntryRequest;
+import org.example.validator.JobEntryValidator;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class JobsRoleValidatorTest {
-    JobRoleValidator jobRoleValidator = new JobRoleValidator();
+    JobEntryValidator jobRoleValidator = new JobEntryValidator();
     @Test
     void isValidJobRole_shouldReturnTrue_whenValidJobRole() {
-        JobRole jRole = new JobRole(
-                "software engineer"
-
+        JobEntryRequest jRole = new JobEntryRequest(
+                "Business Development Manager",
+                "Business Development",
+                "Business Development and Market",
+                "Manager",
+                "Management",
+                "Develop and implement business development strategies",
+                "null"
         );
 
 
-        assertTrue(jobRoleValidator.isValidJobRole(jRole));
+        assertNull(jobRoleValidator.isValidJobRole(jRole));
     }
 }

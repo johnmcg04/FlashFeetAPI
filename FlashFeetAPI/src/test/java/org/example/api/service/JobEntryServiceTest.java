@@ -18,13 +18,5 @@ public class JobEntryServiceTest {
 
         JobEntryService jobEntryService = new JobEntryService(jobEntryDao, databaseConnector);
 
-        JobEntry jRole = new JobEntry(
-                "Test engineer",
-                "Test Specification",
-                "Test capability",
-                "Test bandLevel",
-                "Test jobFamily",
-                "Test responsibility"
-        );
 
 }

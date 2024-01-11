@@ -9,7 +9,7 @@ import java.util.List;
 
 public class JobEntryDao {
 
-
+    public Connection getAllJobEntries(Connection c){return c;}
     private DatabaseConnector databaseConnector = new DatabaseConnector();
     public List<JobEntry> getAllJobEntries() throws SQLException {
         Connection c = databaseConnector.getConnection();

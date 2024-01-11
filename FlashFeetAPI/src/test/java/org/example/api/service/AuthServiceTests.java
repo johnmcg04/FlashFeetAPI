@@ -4,11 +4,6 @@ import org.example.api.SignUpService;
 import org.example.cli.Login;
 import org.example.db.SignUpDao;
 import org.example.db.DatabaseConnector;
-import org.example.exception.DatabaseConnectionException;
-import org.example.exception.FailedToLoginException;
-import org.example.exception.FailedTogenerateTokenException;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -29,7 +24,7 @@ public class AuthServiceTests {
 
     private final Connection c = mock(Connection.class);
 
-    public AuthServiceTests() throws DatabaseConnectionException, SQLException {
+    public AuthServiceTests() throws SQLException {
     }
 
 

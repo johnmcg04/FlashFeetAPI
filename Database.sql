@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS FlashFeet_JohnMc;
 USE FlashFeet_JohnMc;
 
 DELIMITER $$
-DROP PROCEDURE IF EXISTS CreateDatabase $$
+DROP PROCEDURE IF EXISTS CreateJobRoleTable $$
 CREATE PROCEDURE CreateDatabase()
 BEGIN
   

@@ -1,5 +1,6 @@
 package org.example.api;
 
+import org.example.cli.FailedToCreateJobEntryException;
 import org.example.cli.JobEntry;
 import org.example.cli.JobEntryRequest;
 import org.example.client.FailedToGetJobEntriesException;
@@ -68,6 +69,31 @@ public class JobEntryService {
             System.err.println(e.getMessage());
 
             throw new FailedToUpdateJobEntryException();
+        }
+    }
+
+    public boolean createJobEntry(JobEntryRequest jobEntry) throws FailedToCreateJobEntryException, InvalidJobEntryException, SQLException {
+        try {
+            String validation = jobEntryValidator.isValidJobRole(jobEntry);
+
+            if (validation != null) {
+                throw new InvalidJobEntryException(validation);
+            }
+            return jobEntryDao.createJobEntry(jobEntry);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            throw new FailedToCreateJobEntryException();
+        }
+    }
+
+    public int deleteJobRole(String jobRole) throws JobEntryDoesNotExistException {
+        try {
+            jobEntryDao.deleteJobRole(jobRole);
+            return 1;
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return -1;
+
         }
     }
 

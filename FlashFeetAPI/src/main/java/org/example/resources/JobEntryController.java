@@ -6,11 +6,14 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.example.api.JobEntryService;
+import org.example.cli.FailedToCreateJobEntryException;
 import org.example.cli.JobEntryRequest;
 import org.example.client.FailedToGetJobEntriesException;
 import org.example.client.FailedToUpdateJobEntryException;
 import org.example.client.InvalidJobEntryException;
 import org.example.client.JobEntryDoesNotExistException;
+
+import java.sql.SQLException;
 
 @Api("FlashFeet Kainos Job Entry API")
 @Path("/api")
@@ -46,6 +49,25 @@ public class JobEntryController {
         }
     }
 
+    @POST
+    @Path("/create-job-entry")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createJobRole(JobEntryRequest jobEntry) {
+        try {
+            return Response.ok(jobEntryService.createJobEntry(jobEntry)).build();
+        } catch (FailedToCreateJobEntryException e) {
+            System.err.println(e.getMessage());
+
+            return Response.serverError().build();
+        } catch (InvalidJobEntryException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @PUT
     @Path("/job-entry/{jobRole}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -62,6 +84,21 @@ public class JobEntryController {
             System.err.println(e.getMessage());
 
             return Response.serverError().build();
+        }
+    }
+
+    @DELETE
+    @Path("/delete-job-role/{jobRole}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteJobRole(@PathParam("jobRole") String jobRole) {
+        try {
+            jobEntryService.deleteJobRole(jobRole);
+
+            return Response.ok().build();
+        } catch (JobEntryDoesNotExistException e) {
+            System.err.println(e.getMessage());
+
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
 

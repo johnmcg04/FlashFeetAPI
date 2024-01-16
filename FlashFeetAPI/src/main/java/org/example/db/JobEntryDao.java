@@ -73,4 +73,44 @@ public class JobEntryDao {
 
         st.executeUpdate();
     }
+
+    public boolean createJobEntry(JobEntryRequest jobEntry) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+
+        String insertStatement = "INSERT into JobRole (jobRole, jobSpecification, capability, bandLevel, jobFamily, responsibilities, jobSpecSummary) VALUES (?,?,?,?,?,?,?);";
+
+        PreparedStatement st = c.prepareStatement(insertStatement);
+
+        st.setString(1, jobEntry.getJobRole());
+        st.setString(2, jobEntry.getJobSpecification());
+        st.setString(3, jobEntry.getCapability());
+        st.setString(4, jobEntry.getBandLevel());
+        st.setString(5, jobEntry.getJobFamily());
+        st.setString(6, jobEntry.getResponsibilities());
+        st.setString(7, jobEntry.getJobSpecSummary());
+
+        st.executeUpdate();
+        return true;
+    }
+
+    public int deleteJobRole(String jobRole) throws SQLException{
+        try{
+            Connection c = databaseConnector.getConnection();
+
+            String deleteStatement = "DELETE FROM JobRole WHERE jobRole = ?";
+
+            PreparedStatement st = c.prepareStatement(deleteStatement);
+
+            st.setString(1, jobRole);
+
+            st.executeUpdate();
+            return 1;
+        }
+
+
+        catch(SQLException ex){
+            System.out.println(ex.getMessage());
+            return -1;
+        }
+    }
 }

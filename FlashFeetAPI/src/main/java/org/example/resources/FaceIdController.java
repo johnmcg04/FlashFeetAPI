@@ -1,5 +1,6 @@
 package org.example.resources;
 
+import io.swagger.annotations.Api;
 import org.example.api.FaceIdService;
 import org.example.api.SignUpService;
 import org.example.cli.JobEntryRequest;
@@ -13,6 +14,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@Api("FlashFeet Kainos Job Entry API")
+@Path("/api")
 public class FaceIdController {
 
     @POST

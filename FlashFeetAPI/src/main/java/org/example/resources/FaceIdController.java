@@ -15,7 +15,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Api("FlashFeet Kainos Job Entry API")
+@Api("FlashFeet Face Id Controller")
 @Path("/api")
 public class FaceIdController {
 
@@ -40,11 +40,12 @@ public class FaceIdController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response checkIfUserHasFaceIdByUsername(@PathParam("username") String username) {
         try {
-            boolean hasFaceId = FaceIdService.checkIfUserHasFaceIdByUsername(username);
-            return Response.ok(hasFaceId).build();
+            FaceIdService.checkIfUserHasFaceIdByUsername(username);
+
+            return Response.ok().build();
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
         }
     }
 

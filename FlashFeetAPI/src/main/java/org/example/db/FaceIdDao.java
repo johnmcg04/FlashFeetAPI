@@ -1,11 +1,11 @@
 package org.example.db;
 
+import org.example.cli.JobEntry;
 import org.example.cli.JobEntryRequest;
 import org.example.cli.SignUp;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Objects;
 
 public class FaceIdDao {
 
@@ -28,5 +28,20 @@ public class FaceIdDao {
             System.err.println(e.getMessage());
             return false;
         }
+    }
+
+    public static boolean checkIfUserHasFaceIdByUsername(String username) throws SQLException {
+        Connection c = databaseConnector.getConnection();
+
+        Statement st = c.createStatement();
+        ResultSet rs = st.executeQuery( "SELECT Username FROM User WHERE hasFaceId = 1");
+
+        while (rs.next()){
+            String databaseUsername = rs.getString("Username");
+            if(Objects.equals(username, databaseUsername)){
+                return true;
+            }
+        }
+        return false;
     }
 }

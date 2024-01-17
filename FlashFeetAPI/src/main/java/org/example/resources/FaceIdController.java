@@ -5,6 +5,7 @@ import org.example.api.FaceIdService;
 import org.example.api.SignUpService;
 import org.example.cli.JobEntryRequest;
 import org.example.cli.SignUp;
+import org.example.client.FailedToGetJobEntriesException;
 import org.example.client.FailedToUpdateJobEntryException;
 import org.example.client.InvalidJobEntryException;
 import org.example.client.JobEntryDoesNotExistException;
@@ -33,6 +34,21 @@ public class FaceIdController {
             throw new RuntimeException(e);
         }
     }
+
+    @POST
+    @Path("/checkIfUserHasFaceIdLinked/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response checkIfUserHasFaceIdByUsername(@PathParam("username") String username) {
+        try {
+            boolean hasFaceId = FaceIdService.checkIfUserHasFaceIdByUsername(username);
+            return Response.ok(hasFaceId).build();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        }
+    }
+
+
 
 
 }

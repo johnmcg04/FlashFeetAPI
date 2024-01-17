@@ -3,6 +3,7 @@ package org.example.api;
 import org.example.cli.JobEntry;
 import org.example.cli.JobEntryRequest;
 import org.example.cli.SignUp;
+import org.example.client.FailedToGetJobEntriesException;
 import org.example.client.FailedToUpdateJobEntryException;
 import org.example.client.InvalidJobEntryException;
 import org.example.client.JobEntryDoesNotExistException;
@@ -45,5 +46,13 @@ public class FaceIdService {
             ex.getMessage();
         }
         return false;
+    }
+
+    public static boolean checkIfUserHasFaceIdByUsername(String username) {
+        try {
+            return FaceIdDao.checkIfUserHasFaceIdByUsername(username);
+        } catch (SQLException e) {
+            return false;
+        }
     }
 }

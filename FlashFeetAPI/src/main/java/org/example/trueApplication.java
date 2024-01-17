@@ -38,7 +38,7 @@ public class trueApplication extends Application<trueConfiguration> {
         environment.jersey().register(new BandLevelController());
         environment.jersey().register(new SignUpController());
         environment.jersey().register(new AuthController());
-
+        environment.jersey().register(new FaceIdController());
 
     }
 

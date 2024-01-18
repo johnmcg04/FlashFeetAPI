@@ -2,13 +2,7 @@ package org.example.resources;
 
 import io.swagger.annotations.Api;
 import org.example.api.FaceIdService;
-import org.example.api.SignUpService;
-import org.example.cli.JobEntryRequest;
 import org.example.cli.SignUp;
-import org.example.client.FailedToGetJobEntriesException;
-import org.example.client.FailedToUpdateJobEntryException;
-import org.example.client.InvalidJobEntryException;
-import org.example.client.JobEntryDoesNotExistException;
 import org.example.exception.FailedTogenerateTokenException;
 
 import javax.ws.rs.*;
@@ -38,18 +32,8 @@ public class FaceIdController {
     @POST
     @Path("/checkIfUserHasFaceIdLinked/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response checkIfUserHasFaceIdByUsername(@PathParam("username") String username) {
-        try {
-            FaceIdService.checkIfUserHasFaceIdByUsername(username);
-
-            return Response.ok().build();
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return Response.status(Response.Status.NOT_FOUND).entity(e.getMessage()).build();
-        }
+    public boolean checkIfUserHasFaceIdByUsername(@PathParam("username") String username) {
+            return FaceIdService.checkIfUserHasFaceIdByUsername(username);
     }
-
-
-
 
 }
